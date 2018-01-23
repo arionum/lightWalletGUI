@@ -484,11 +484,16 @@ Public Class frmMain
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        If trd.IsAlive = False Then
-            trd = New Thread(AddressOf sync_data)
-            trd.IsBackground = True
-            trd.Start()
-        End If
+        Try
+            If trd.IsAlive = False Then
+                trd = New Thread(AddressOf sync_data)
+                trd.IsBackground = True
+                trd.Start()
+            End If
+        Catch ex As Exception
+
+        End Try
+
 
 
     End Sub
@@ -587,6 +592,11 @@ Public Class frmMain
 
             End If
         End If
+
+    End Sub
+
+    Private Sub DataGridView1_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles DataGridView1.DataError
+        e.ThrowException = False
 
     End Sub
 End Class

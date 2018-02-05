@@ -161,6 +161,12 @@ Public Class frmMain
         End If
         public_key = public_key.Trim()
         private_key = private_key.Trim()
+        If public_key.Length < 20 Or private_key.Length < 20 Then
+
+            MsgBox("Could not load the wallet. The keys seem invalid.", vbCritical)
+            End
+        End If
+
         txtpub.Text = public_key
         txtpriv.Text = private_key
         sendAmt.Text = "1.00"
@@ -336,9 +342,17 @@ Public Class frmMain
 
 
     Private Sub sendAmt_TextChanged_1(sender As Object, e As EventArgs) Handles sendAmt.TextChanged
-        Dim f As Decimal = Convert.ToDecimal(sendAmt.Text) * 0.0025
-        If f < 0.00000001 Then f = 0.00000001
-        fee.Text = f
+        Try
+
+
+            Dim f As Decimal = Convert.ToDecimal(sendAmt.Text) * 0.0025
+            If f < 0.00000001 Then f = 0.00000001
+            If f > 10 Then f = 10
+
+            fee.Text = f
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub sendAmt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles sendAmt.KeyPress
@@ -356,9 +370,10 @@ Public Class frmMain
         Dim sum As Decimal = Convert.ToDecimal(sendAmt.Text)
         Dim f As Decimal = sum * 0.0025
         If f < 0.00000001 Then f = 0.00000001
+        If f > 10 Then f = 10
         If (balance < f + sum) Then
-            MsgBox("Not enough balance to send this transaction!", vbCritical)
-            Exit Sub
+            ' MsgBox("Not enough balance to send this transaction!", vbCritical)
+            ' Exit Sub
         End If
 
 
@@ -370,8 +385,8 @@ Public Class frmMain
             uTime = (DateTime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds
 
             Dim info As String
-            info = FormatNumber(sum, 8) + "-" + FormatNumber(f, 8) + "-" + sendTo.Text + "-" + sendMsg.Text + "-1-" + public_key + "-" + uTime.ToString
-
+            info = FormatNumber(sum, 8).Replace(",", "") + "-" + FormatNumber(f, 8).Replace(",", "") + "-" + sendTo.Text + "-" + sendMsg.Text + "-1-" + public_key + "-" + uTime.ToString
+            Console.WriteLine(info)
             Dim res As String
             Static Generator As System.Random = New System.Random()
             Dim r = Generator.Next(0, total_peers - 1)
@@ -499,100 +514,109 @@ Public Class frmMain
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        If MsgBox("Restoring another wallet will delete the current wallet. Are you sure you wish to proceed?", vbYesNo) = vbYes Then
-            Dim wallet As String
-
-            If OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                Dim path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\Arionum"
-                Dim uTime As Int64
-                uTime = (DateTime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds
-                Dim file As System.IO.StreamWriter
-                If isEncrypted = True Then
-                    wallet = encryptedWallet
-                Else
-                    wallet = "arionum:" + private_key + ":" + public_key
-                End If
-                Try
-                    file = My.Computer.FileSystem.OpenTextFileWriter(path + "\wallet_backup_" & uTime.ToString & ".aro", False)
-                    file.WriteLine(wallet)
-                    file.Close()
-                Catch ex As Exception
-                    MsgBox("Could not write a backup the old wallet file. Restore failed.", vbCritical)
-                    Exit Sub
-                End Try
+        Try
 
 
+            If MsgBox("Restoring another wallet will delete the current wallet. Are you sure you wish to proceed?", vbYesNo) = vbYes Then
+                Dim wallet As String
 
-                isEncrypted = False
-                Dim s As String
-                Dim tr As System.IO.TextReader = New System.IO.StreamReader(OpenFileDialog1.FileName)
-                s = tr.ReadToEnd
-                tr.Close()
-
-                If s.Substring(0, 8) <> "arionum:" Then
-                    encryptedWallet = s
-                    frmDecrypt.ShowDialog()
-                    s = decryptedWallet
-                    If s.Length = 0 Then
-                        MsgBox("Could not decrypt wallet. Exiting...", vbCritical)
-                        End
+                If OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                    Dim path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\Arionum"
+                    Dim uTime As Int64
+                    uTime = (DateTime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds
+                    Dim file As System.IO.StreamWriter
+                    If isEncrypted = True Then
+                        wallet = encryptedWallet
+                    Else
+                        wallet = "arionum:" + private_key + ":" + public_key
                     End If
-                    isEncrypted = True
+                    Try
+                        file = My.Computer.FileSystem.OpenTextFileWriter(path + "\wallet_backup_" & uTime.ToString & ".aro", False)
+                        file.WriteLine(wallet)
+                        file.Close()
+                    Catch ex As Exception
+                        MsgBox("Could not write a backup the old wallet file. Restore failed.", vbCritical)
+                        Exit Sub
+                    End Try
+
+
+
+                    isEncrypted = False
+                    Dim s As String
+                    Dim tr As System.IO.TextReader = New System.IO.StreamReader(OpenFileDialog1.FileName)
+                    s = tr.ReadToEnd
+                    tr.Close()
+
+                    If s.Substring(0, 8) <> "arionum:" Then
+                        encryptedWallet = s
+                        frmDecrypt.ShowDialog()
+                        s = decryptedWallet
+                        If s.Length = 0 Then
+                            MsgBox("Could not decrypt wallet. Exiting...", vbCritical)
+                            End
+                        End If
+                        isEncrypted = True
+                    End If
+
+                    Dim wal = s.Split(":")
+                    private_key = wal(1)
+                    public_key = wal(2)
+                    If public_key.Length < 10 Or private_key.Length < 10 Then
+
+                        MsgBox("Could not import the wallet. The keys seem invalid.", vbCritical)
+                        Exit Sub
+                    End If
+                    If isEncrypted = True Then
+                        wallet = encryptedWallet
+                    Else
+                        wallet = "arionum:" + private_key + ":" + public_key
+                    End If
+
+                    Try
+                        file = My.Computer.FileSystem.OpenTextFileWriter(path + "\wallet.aro", False)
+                        file.WriteLine(wallet)
+                        file.Close()
+                    Catch ex As Exception
+                        MsgBox("Could not write the wallet file. Please check the permissions on " + path + "\wallet.aro. Restore failed.", vbCritical)
+                        Exit Sub
+                    End Try
+
+
+                    public_key = public_key.Trim()
+                    private_key = private_key.Trim()
+                    txtpub.Text = public_key
+                    txtpriv.Text = private_key
+                    If isEncrypted = True Then
+                        btnDecrypt.Text = "Decrypt"
+                    Else
+                        btnDecrypt.Text = "Encrypt"
+                    End If
+                    Dim encoder As New Text.UTF8Encoding()
+                    Dim enc As Byte()
+
+                    Dim sha512hasher As New System.Security.Cryptography.SHA512Managed()
+
+
+                    enc = encoder.GetBytes(public_key)
+                    For i = 0 To 8
+                        enc = sha512hasher.ComputeHash(enc)
+                    Next
+
+
+
+                    address = SimpleBase.Base58.Bitcoin.Encode(enc)
+                    txtaddress.Text = address
+                    If trd.IsAlive = False Then
+                        trd = New Thread(AddressOf sync_data)
+                        trd.IsBackground = True
+                        trd.Start()
+                    End If
+
                 End If
-
-                Dim wal = s.Split(":")
-                private_key = wal(1)
-                public_key = wal(2)
-
-                If isEncrypted = True Then
-                    wallet = encryptedWallet
-                Else
-                    wallet = "arionum:" + private_key + ":" + public_key
-                End If
-
-                Try
-                    file = My.Computer.FileSystem.OpenTextFileWriter(path + "\wallet.aro", False)
-                    file.WriteLine(wallet)
-                    file.Close()
-                Catch ex As Exception
-                    MsgBox("Could not write the wallet file. Please check the permissions on " + path + "\wallet.aro. Restore failed.", vbCritical)
-                    Exit Sub
-                End Try
-
-
-                public_key = public_key.Trim()
-                private_key = private_key.Trim()
-                txtpub.Text = public_key
-                txtpriv.Text = private_key
-                If isEncrypted = True Then
-                    btnDecrypt.Text = "Decrypt"
-                Else
-                    btnDecrypt.Text = "Encrypt"
-                End If
-                Dim encoder As New Text.UTF8Encoding()
-                Dim enc As Byte()
-
-                Dim sha512hasher As New System.Security.Cryptography.SHA512Managed()
-
-
-                enc = encoder.GetBytes(public_key)
-                For i = 0 To 8
-                    enc = sha512hasher.ComputeHash(enc)
-                Next
-
-
-
-                address = SimpleBase.Base58.Bitcoin.Encode(enc)
-                txtaddress.Text = address
-                If trd.IsAlive = False Then
-                    trd = New Thread(AddressOf sync_data)
-                    trd.IsBackground = True
-                    trd.Start()
-                End If
-
             End If
-        End If
-
+        Catch ex As Exception
+            MsgBox("Could not import the wallet file.", vbCritical)
+        End Try
     End Sub
 
     Private Sub DataGridView1_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles DataGridView1.DataError

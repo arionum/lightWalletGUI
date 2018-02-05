@@ -68,14 +68,14 @@ Partial Class frmMain
         Me.lblNode = New System.Windows.Forms.ToolStripStatusLabel()
         Me.statusNode = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblBalance = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel6 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel4 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.statusBlock = New System.Windows.Forms.ToolStripStatusLabel()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.lblBalance = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabel6 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.TabPage2.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -479,6 +479,18 @@ Partial Class frmMain
         Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(582, 17)
         Me.ToolStripStatusLabel3.Spring = True
         '
+        'lblBalance
+        '
+        Me.lblBalance.Name = "lblBalance"
+        Me.lblBalance.Size = New System.Drawing.Size(13, 17)
+        Me.lblBalance.Text = "0"
+        '
+        'ToolStripStatusLabel6
+        '
+        Me.ToolStripStatusLabel6.AutoSize = False
+        Me.ToolStripStatusLabel6.Name = "ToolStripStatusLabel6"
+        Me.ToolStripStatusLabel6.Size = New System.Drawing.Size(120, 17)
+        '
         'ToolStripStatusLabel4
         '
         Me.ToolStripStatusLabel4.Name = "ToolStripStatusLabel4"
@@ -519,18 +531,6 @@ Partial Class frmMain
         Me.Button2.Text = "Restore"
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'lblBalance
-        '
-        Me.lblBalance.Name = "lblBalance"
-        Me.lblBalance.Size = New System.Drawing.Size(13, 17)
-        Me.lblBalance.Text = "0"
-        '
-        'ToolStripStatusLabel6
-        '
-        Me.ToolStripStatusLabel6.AutoSize = False
-        Me.ToolStripStatusLabel6.Name = "ToolStripStatusLabel6"
-        Me.ToolStripStatusLabel6.Size = New System.Drawing.Size(120, 17)
-        '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
@@ -552,7 +552,7 @@ Partial Class frmMain
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmMain"
-        Me.Text = "Arionum LightWallet v0.1b"
+        Me.Text = "Arionum LightWallet v0.2b"
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         Me.TabPage1.ResumeLayout(False)

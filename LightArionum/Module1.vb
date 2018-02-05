@@ -263,9 +263,13 @@ err:
         Dim a As New Chilkat.PublicKey
         a.LoadFromString(textWriter.ToString())
         public_key = a.GetEncoded(True, "base58")
+        If public_key.Length < 10 Or private_key.Length < 10 Then
 
+            MsgBox("Could not generate a valid key pair.", vbCritical)
+            End
+        End If
 
-
+        Return True
     End Function
 End Module
 

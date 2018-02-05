@@ -372,8 +372,8 @@ Public Class frmMain
         If f < 0.00000001 Then f = 0.00000001
         If f > 10 Then f = 10
         If (balance < f + sum) Then
-            ' MsgBox("Not enough balance to send this transaction!", vbCritical)
-            ' Exit Sub
+            MsgBox("Not enough balance to send this transaction!", vbCritical)
+            Exit Sub
         End If
 
 
@@ -386,7 +386,7 @@ Public Class frmMain
 
             Dim info As String
             info = FormatNumber(sum, 8).Replace(",", "") + "-" + FormatNumber(f, 8).Replace(",", "") + "-" + sendTo.Text + "-" + sendMsg.Text + "-1-" + public_key + "-" + uTime.ToString
-            Console.WriteLine(info)
+
             Dim res As String
             Static Generator As System.Random = New System.Random()
             Dim r = Generator.Next(0, total_peers - 1)

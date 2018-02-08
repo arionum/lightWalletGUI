@@ -20,6 +20,7 @@
 'DAMAGES Or OTHER LIABILITY, WHETHER In AN ACTION Of CONTRACT, TORT Or
 'OTHERWISE, ARISING FROM, OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE
 'Or OTHER DEALINGS IN THE SOFTWARE.
+Option Strict Off
 
 Imports System.IO
 Imports Org.BouncyCastle.Crypto
@@ -39,6 +40,7 @@ Public Class frmMain
 
 
             If sync_err > 5 Then
+                MsgBox("Could not sync data. Attempted 5 times to connect to the nodes", vbCritical)
                 sync_err = 0
                 Exit Function
             End If
@@ -56,7 +58,7 @@ Public Class frmMain
                 Exit Function
             End If
 
-            balance = res
+            balance = Decimal.Parse(res)
 
             lblBalance.Text = "Balance: " + balance.ToString
 
@@ -85,14 +87,18 @@ Public Class frmMain
                 Me.DataGridView1.Rows.Add(nDateTime.ToString("MM\/dd\/yyyy HH:mm"), x("type"), x("val"), x("fee"), x("confirmations"), x("src"), x("dst"), x("message"), x("id"))
             Next
         Catch ex As Exception
+            MsgBox("Could not sync data: " & ex.Message, vbCritical)
             Console.WriteLine(ex.Message)
         End Try
     End Function
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
         System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = False
         miner_threads.Text = Environment.ProcessorCount
         Dim path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\Arionum"
+
 
         If (Not Directory.Exists(path)) Then
             FileSystem.MkDir(path)
@@ -173,8 +179,13 @@ Public Class frmMain
 
         txtpub.Text = public_key
         txtpriv.Text = private_key
-        sendAmt.Text = "1.00"
-        fee.Text = sendAmt.Text * 0.0025
+        Try
+            sendAmt.Text = "1.00"
+            fee.Text = 1 * 0.0025
+        Catch ex As Exception
+
+        End Try
+
         If isEncrypted = True Then
             btnDecrypt.Text = "Decrypt"
         Else
@@ -247,7 +258,10 @@ Public Class frmMain
                 End If
             Next
         End If
-
+        If (total_peers < 2) Then
+            MsgBox("Could not get the peer list from arionum.com. Please check your internet connection!", vbCritical)
+            End
+        End If
 
         trd = New Thread(AddressOf sync_data)
         trd.IsBackground = True
@@ -745,5 +759,9 @@ Public Class frmMain
             miner_pm.Checked = False
             sync_data()
         End If
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
     End Sub
 End Class

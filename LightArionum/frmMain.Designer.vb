@@ -23,6 +23,8 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim Label2 As System.Windows.Forms.Label
+        Dim Label4 As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnDecrypt = New System.Windows.Forms.Button()
@@ -62,6 +64,13 @@ Partial Class frmMain
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtpriv = New System.Windows.Forms.TextBox()
         Me.txtpub = New System.Windows.Forms.TextBox()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.miner_log = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.miner_threads = New System.Windows.Forms.TextBox()
+        Me.miner_pool = New System.Windows.Forms.TextBox()
+        Me.miner_button = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
@@ -77,14 +86,54 @@ Partial Class frmMain
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button2 = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.pool_update = New System.Windows.Forms.Timer(Me.components)
+        Me.miner_pm = New System.Windows.Forms.CheckBox()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Label2 = New System.Windows.Forms.Label()
+        Label4 = New System.Windows.Forms.Label()
         Me.TabPage2.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage5.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'Label2
+        '
+        Label2.AutoSize = True
+        Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Label2.Location = New System.Drawing.Point(3, 60)
+        Label2.Name = "Label2"
+        Label2.Size = New System.Drawing.Size(98, 18)
+        Label2.TabIndex = 2
+        Label2.Text = "Pool / Node"
+        '
+        'Label4
+        '
+        Label4.AutoSize = True
+        Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Label4.Location = New System.Drawing.Point(3, 86)
+        Label4.Name = "Label4"
+        Label4.Size = New System.Drawing.Size(69, 18)
+        Label4.TabIndex = 3
+        Label4.Text = "Threads"
         '
         'btnExit
         '
@@ -369,6 +418,8 @@ Partial Class frmMain
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.Location = New System.Drawing.Point(7, 91)
         Me.TabControl1.Name = "TabControl1"
@@ -387,7 +438,7 @@ Partial Class frmMain
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Size = New System.Drawing.Size(938, 434)
         Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Mining Info"
+        Me.TabPage3.Text = "Wallet info"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'Label8
@@ -396,9 +447,10 @@ Partial Class frmMain
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(9, 14)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(389, 20)
+        Me.Label8.Size = New System.Drawing.Size(690, 20)
         Me.Label8.TabIndex = 4
-        Me.Label8.Text = "For solo mining, you will need the following info:"
+        Me.Label8.Text = "Keep your private key secure! You can use the following keys to re-create your wa" &
+    "llet."
         '
         'Label7
         '
@@ -435,6 +487,76 @@ Partial Class frmMain
         Me.txtpub.Name = "txtpub"
         Me.txtpub.Size = New System.Drawing.Size(921, 61)
         Me.txtpub.TabIndex = 0
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.miner_pm)
+        Me.TabPage4.Controls.Add(Me.Label17)
+        Me.TabPage4.Controls.Add(Me.miner_log)
+        Me.TabPage4.Controls.Add(Me.Label16)
+        Me.TabPage4.Controls.Add(Me.miner_threads)
+        Me.TabPage4.Controls.Add(Label4)
+        Me.TabPage4.Controls.Add(Label2)
+        Me.TabPage4.Controls.Add(Me.miner_pool)
+        Me.TabPage4.Controls.Add(Me.miner_button)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 24)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(938, 434)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Miner"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(4, 160)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(31, 15)
+        Me.Label17.TabIndex = 9
+        Me.Label17.Text = "Log:"
+        '
+        'miner_log
+        '
+        Me.miner_log.Location = New System.Drawing.Point(7, 178)
+        Me.miner_log.Multiline = True
+        Me.miner_log.Name = "miner_log"
+        Me.miner_log.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.miner_log.Size = New System.Drawing.Size(926, 253)
+        Me.miner_log.TabIndex = 8
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(2, 16)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(277, 25)
+        Me.Label16.TabIndex = 7
+        Me.Label16.Text = "Arionum Integrated Miner"
+        '
+        'miner_threads
+        '
+        Me.miner_threads.Location = New System.Drawing.Point(107, 86)
+        Me.miner_threads.Name = "miner_threads"
+        Me.miner_threads.Size = New System.Drawing.Size(382, 21)
+        Me.miner_threads.TabIndex = 4
+        '
+        'miner_pool
+        '
+        Me.miner_pool.Location = New System.Drawing.Point(107, 57)
+        Me.miner_pool.Name = "miner_pool"
+        Me.miner_pool.Size = New System.Drawing.Size(382, 21)
+        Me.miner_pool.TabIndex = 1
+        Me.miner_pool.Text = "http://aropool.com"
+        '
+        'miner_button
+        '
+        Me.miner_button.Location = New System.Drawing.Point(7, 117)
+        Me.miner_button.Name = "miner_button"
+        Me.miner_button.Size = New System.Drawing.Size(149, 34)
+        Me.miner_button.TabIndex = 0
+        Me.miner_button.Text = "Start Mining"
+        Me.miner_button.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -536,6 +658,158 @@ Partial Class frmMain
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         Me.OpenFileDialog1.Filter = "Aro Wallet|*.aro"
         '
+        'pool_update
+        '
+        Me.pool_update.Interval = 2000
+        '
+        'miner_pm
+        '
+        Me.miner_pm.AutoSize = True
+        Me.miner_pm.Checked = True
+        Me.miner_pm.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.miner_pm.Location = New System.Drawing.Point(495, 61)
+        Me.miner_pm.Name = "miner_pm"
+        Me.miner_pm.Size = New System.Drawing.Size(92, 19)
+        Me.miner_pm.TabIndex = 10
+        Me.miner_pm.Text = "Pool Mining"
+        Me.miner_pm.UseVisualStyleBackColor = True
+        '
+        'TabPage5
+        '
+        Me.TabPage5.Controls.Add(Me.Label23)
+        Me.TabPage5.Controls.Add(Me.TextBox5)
+        Me.TabPage5.Controls.Add(Me.Label22)
+        Me.TabPage5.Controls.Add(Me.Label21)
+        Me.TabPage5.Controls.Add(Me.Label20)
+        Me.TabPage5.Controls.Add(Me.Label19)
+        Me.TabPage5.Controls.Add(Me.TextBox4)
+        Me.TabPage5.Controls.Add(Me.TextBox3)
+        Me.TabPage5.Controls.Add(Me.TextBox2)
+        Me.TabPage5.Controls.Add(Me.TextBox1)
+        Me.TabPage5.Controls.Add(Me.Label18)
+        Me.TabPage5.Controls.Add(Me.Label15)
+        Me.TabPage5.Controls.Add(Me.Label13)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 24)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Size = New System.Drawing.Size(938, 434)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "About"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'Label13
+        '
+        Me.Label13.Location = New System.Drawing.Point(3, 15)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(914, 57)
+        Me.Label13.TabIndex = 0
+        Me.Label13.Text = resources.GetString("Label13.Text")
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(3, 72)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(824, 15)
+        Me.Label15.TabIndex = 1
+        Me.Label15.Text = "There has been no PRE-MINE or ICO  on Arionum, the development has been done and " &
+    "will always be done free of charge by the Arionum Developers."
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(3, 100)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(551, 15)
+        Me.Label18.TabIndex = 2
+        Me.Label18.Text = "If you would like to support the Arionum development, you can donate to one of th" &
+    "e addresses below:"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(6, 146)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(911, 21)
+        Me.TextBox1.TabIndex = 3
+        Me.TextBox1.Text = "5WuRMXGM7Pf8NqEArVz1NxgSBptkimSpvuSaYC79g1yo3RDQc8TjVtGH5chQWQV7CHbJEuq9DmW5fbmCE" &
+    "W4AghQr"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(6, 193)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(911, 21)
+        Me.TextBox2.TabIndex = 4
+        Me.TextBox2.Text = "LWgqzbXGeucKaMmJEvwaAWPFrAgKiJ4Y4m"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(6, 236)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(911, 21)
+        Me.TextBox3.TabIndex = 5
+        Me.TextBox3.Text = "1LdoMmYitb4C3pXoGNLL1VRj7xk3smGXoU"
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(6, 281)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(911, 21)
+        Me.TextBox4.TabIndex = 6
+        Me.TextBox4.Text = "0x4B904bDf071E9b98441d25316c824D7b7E447527"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(3, 128)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(32, 15)
+        Me.Label19.TabIndex = 7
+        Me.Label19.Text = "ARO"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(3, 175)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(29, 15)
+        Me.Label20.TabIndex = 8
+        Me.Label20.Text = "LTC"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(3, 218)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(30, 15)
+        Me.Label21.TabIndex = 9
+        Me.Label21.Text = "BTC"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(3, 263)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(31, 15)
+        Me.Label22.TabIndex = 10
+        Me.Label22.Text = "ETH"
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(3, 307)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(32, 15)
+        Me.Label23.TabIndex = 12
+        Me.Label23.Text = "BCH"
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(6, 325)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(911, 21)
+        Me.TextBox5.TabIndex = 11
+        Me.TextBox5.Text = "qrtkqrl3mxzdzl66nchkgdv73uu3rf7jdy7el2vduw"
+        '
         'frmMain
         '
         Me.ClientSize = New System.Drawing.Size(956, 573)
@@ -549,10 +823,11 @@ Partial Class frmMain
         Me.Controls.Add(Me.btnExit)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmMain"
-        Me.Text = "Arionum LightWallet v0.2b"
+        Me.Text = "Arionum LightWallet v0.3a"
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         Me.TabPage1.ResumeLayout(False)
@@ -561,9 +836,13 @@ Partial Class frmMain
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
+        Me.TabPage4.ResumeLayout(False)
+        Me.TabPage4.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage5.ResumeLayout(False)
+        Me.TabPage5.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -622,4 +901,27 @@ Partial Class frmMain
     Friend WithEvents ToolStripStatusLabel6 As ToolStripStatusLabel
     Friend WithEvents Button2 As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents Label17 As Label
+    Friend WithEvents miner_log As TextBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents miner_threads As TextBox
+    Friend WithEvents miner_pool As TextBox
+    Friend WithEvents miner_button As Button
+    Friend WithEvents pool_update As Timer
+    Friend WithEvents miner_pm As CheckBox
+    Friend WithEvents TabPage5 As TabPage
+    Friend WithEvents Label23 As Label
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents Label22 As Label
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label20 As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label13 As Label
 End Class

@@ -32,11 +32,13 @@ Imports Org.BouncyCastle.Asn1.Sec
 Imports Org.BouncyCastle.Math
 Imports Org.BouncyCastle.Math.EC
 Imports Org.BouncyCastle.OpenSsl
-
+Imports Liphsoft.Crypto.Argon2
 Imports System.IO
 Imports System.Net
 
 Imports Newtonsoft.Json.Linq
+Imports System.Security.Cryptography
+Imports System.Threading
 
 Module Module1
     Public encryptPass As String
@@ -50,8 +52,18 @@ Module Module1
     Public total_peers As Integer
     Public balance As Decimal
     Public sync_err As Integer = 0
-
-
+    Public min_pool
+    Public min_speed
+    Public min_diff As String
+    Public min_block As String = ""
+    Public min_pubkey As String = ""
+    Public min_limit As Integer = "240"
+    Public min_threads As Integer
+    Public thd_ids(128) As Integer
+    Public thd_speeds(128) As Decimal
+    Public min_buffer As String
+    Public testnet = False
+    Public min_pm As Boolean
     Public Function pem2coin(ByVal data As String)
         data = Replace(data, "-----BEGIN PUBLIC KEY-----", "")
         data = Replace(data, "-----END PUBLIC KEY-----", "")
@@ -155,6 +167,7 @@ Module Module1
         End Try
     End Function
     Public Function http_get(ByVal url As String) As String
+
         'Console.WriteLine(url)
         Dim request As HttpWebRequest
         Dim response As HttpWebResponse = Nothing
@@ -170,7 +183,7 @@ Module Module1
 
             Dim rawresp As String
             rawresp = reader.ReadToEnd()
-
+            '   Console.WriteLine(rawresp)
             Return rawresp.Trim()
         Catch ex As Exception
             Console.WriteLine(ex.ToString)
@@ -270,6 +283,164 @@ err:
         End If
 
         Return True
+    End Function
+    Public Function generate_nonce()
+        Dim byte_count As Byte() = New Byte(32) {}
+        Dim random_number As New RNGCryptoServiceProvider()
+        random_number.GetBytes(byte_count)
+        Return System.Convert.ToBase64String(byte_count).Replace("+", "").Replace("/", "").Replace("=", "")
+    End Function
+
+    Public Function SplitInParts(s As String, partLength As Integer) As IEnumerable(Of String)
+        If String.IsNullOrEmpty(s) Then
+            Throw New ArgumentNullException("String cannot be null or empty.")
+        End If
+        If partLength <= 0 Then
+            Throw New ArgumentException("Split length has to be positive.")
+        End If
+        Return Enumerable.Range(0, Math.Ceiling(s.Length / partLength)).Select(Function(i) s.Substring(i * partLength, If(s.Length - (i * partLength) >= partLength, partLength, Math.Abs(s.Length - (i * partLength)))))
+    End Function
+    Private Function BytesToString(ByVal Input As Byte()) As String
+        Dim Result As New System.Text.StringBuilder(Input.Length * 2)
+        Dim Part As String
+        For Each b As Byte In Input
+            Part = Conversion.Hex(b)
+            If Part.Length = 1 Then Part = "0" & Part
+            Result.Append(Part)
+        Next
+        Return Result.ToString()
+    End Function
+
+    Public Async Function miner() As Task
+
+        Try
+
+            Dim hasher As PasswordHasher = New PasswordHasher(1, 524288, 1)
+            Dim nonce As String = generate_nonce()
+            Dim j As Integer
+            j = 0
+            Dim start As DateTime = Now
+            Dim stopt As DateTime
+            Dim el As TimeSpan
+            Dim hr As Decimal
+            Dim argon As String
+            While (1)
+
+                If min_pubkey = "" Then Continue While
+
+                If j = 10 Then
+                    stopt = Now
+                    el = stopt.Subtract(start)
+                    hr = 10 / el.TotalSeconds.ToString
+                    thd_speeds(Thread.CurrentThread.ManagedThreadId) = hr
+                    start = Now
+                    j = 0
+
+                End If
+
+
+                Dim base As String
+                Dim base2 As String
+                base = min_pubkey & "-" & nonce & "-" & min_block & "-" & min_diff
+                Dim sha512 As SHA512 = SHA512Managed.Create()
+                argon = hasher.Hash(base)
+                base2 = base & argon
+
+
+                Dim hashf As Byte() = Encoding.UTF8.GetBytes(base2)
+                For i = 1 To 6
+                    hashf = sha512.ComputeHash(hashf)
+                Next
+
+                base = BytesToString(hashf)
+
+                Dim x = SplitInParts(base, 2)
+                Dim duration As String
+                duration = Convert.ToInt32(x(10), 16).ToString & Convert.ToInt32(x(15), 16).ToString & Convert.ToInt32(x(20), 16).ToString & Convert.ToInt32(x(23), 16).ToString & Convert.ToInt32(x(31), 16).ToString & Convert.ToInt32(x(40), 16).ToString & Convert.ToInt32(x(45), 16).ToString & Convert.ToInt32(x(55), 16).ToString
+
+                Dim res As Int64 = Numerics.BigInteger.Divide(Numerics.BigInteger.Parse(duration), Numerics.BigInteger.Parse(min_diff))
+
+                If (res <= min_limit) Then
+                    Await miner_submit(nonce, argon)
+                    nonce = generate_nonce()
+                End If
+                j = j + 1
+            End While
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
+    End Function
+    Public Function miner_update()
+        Dim res = get_json(min_pool & "/mine.php?q=info&address=" & address & "&hashrate=" & min_speed & "&worker=lightwallet")
+        If res.ToString <> "" Then
+            min_block = res("block")
+            min_diff = res("difficulty")
+            If min_pm = True Then
+                min_pubkey = res("public_key")
+                min_limit = res("limit")
+            Else
+                min_pubkey = public_key
+                min_limit = 240
+            End If
+            If testnet = True Then
+                min_limit = 1000000000
+            End If
+            ' frmMain.min_log("Updating mining info - " & min_diff)
+        Else
+            frmMain.min_log("Updating mining info failed. Please check the pool")
+        End If
+
+    End Function
+    Public Async Function miner_submit(ByVal nonce As String, ByVal argon As String) As Task
+
+
+        Try
+            argon = argon.Substring(30)
+            min_buffer = "--> Submitting Nonce: " & nonce & " / " & argon & vbCrLf & min_buffer
+
+
+
+            Dim postData As String = "argon=" & WebUtility.UrlEncode(argon) & "&nonce=" & nonce & "&address=" & address
+            If min_pm = False Then
+                postData = postData & "&public_key=" & public_key & "&private_key=" & private_key
+            End If
+            Dim encoding As New UTF8Encoding
+            Dim byteData As Byte() = encoding.GetBytes(postData)
+
+            Dim postReq As HttpWebRequest = DirectCast(WebRequest.Create(min_pool & "/mine.php?q=submitNonce"), HttpWebRequest)
+            postReq.Method = "POST"
+            postReq.KeepAlive = True
+
+            postReq.ContentType = "application/x-www-form-urlencoded"
+            postReq.ContentLength = byteData.Length
+
+            Dim postreqstream As Stream = postReq.GetRequestStream()
+            postreqstream.Write(byteData, 0, byteData.Length)
+            postreqstream.Close()
+            Dim postresponse As HttpWebResponse
+
+            postresponse = DirectCast(postReq.GetResponse(), HttpWebResponse)
+            Dim postreqreader As New StreamReader(postresponse.GetResponseStream())
+            Dim res As String = postreqreader.ReadToEnd
+
+            ' Console.WriteLine(res)
+            If res = "" Then
+                Exit Function
+            End If
+
+            Dim array As JObject = JObject.Parse(res)
+
+
+            If array("status") = "ok" Then
+
+                min_buffer = "---- Nonce accepted !!! We've earned some shares! ----" & vbCrLf & min_buffer
+            Else
+                min_buffer = "Nonce rejected! Pool response: " & array("data").ToString & vbCrLf & min_buffer
+            End If
+
+        Catch ex As Exception
+            Console.WriteLine(ex)
+        End Try
     End Function
 End Module
 

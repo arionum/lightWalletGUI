@@ -14,6 +14,8 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>true</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -29,7 +31,7 @@
     <PublisherName>Arionum Developers</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>21</ApplicationRevision>
+    <ApplicationRevision>25</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -123,6 +125,9 @@
     <Reference Include="Cryptography.ECDSA, Version=2.1.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Cryptography.ECDSA.Secp256k1.1.0.1\lib\netstandard1.3\Cryptography.ECDSA.dll</HintPath>
     </Reference>
+    <Reference Include="Liphsoft.Crypto.Argon2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Liphsoft.Crypto.Argon2.1.0.5\lib\net35\x86\Liphsoft.Crypto.Argon2.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
     </Reference>
@@ -132,7 +137,9 @@
     <Reference Include="SimpleBase, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleBase.1.3.1\lib\net45\SimpleBase.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
       <Private>True</Private>
@@ -303,14 +310,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Visual.C++.14.0.x86">
-      <Visible>False</Visible>
-      <ProductName>Visual C++ "14" Runtime Libraries %28x86%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
     <Content Include="sigla arionum.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="..\packages\Liphsoft.Crypto.Argon2.1.0.5\build\Liphsoft.Crypto.Argon2.targets" Condition="Exists('..\packages\Liphsoft.Crypto.Argon2.1.0.5\build\Liphsoft.Crypto.Argon2.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Liphsoft.Crypto.Argon2.1.0.5\build\Liphsoft.Crypto.Argon2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Liphsoft.Crypto.Argon2.1.0.5\build\Liphsoft.Crypto.Argon2.targets'))" />
+  </Target>
 </Project>

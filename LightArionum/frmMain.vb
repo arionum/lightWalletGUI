@@ -27,9 +27,11 @@ Imports Org.BouncyCastle.Crypto.Parameters
 Imports Org.BouncyCastle.OpenSsl
 Imports Org.BouncyCastle.Security
 Imports System.Threading
-
+Imports System.Text
 
 Public Class frmMain
+    Dim min_thread(32) As Thread
+    Dim min_last_speed As Decimal
     Dim i As Integer
     Private trd As Thread
     Public Async Function sync_data() As Task
@@ -89,7 +91,7 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = False
-
+        miner_threads.Text = Environment.ProcessorCount
         Dim path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\Arionum"
 
         If (Not Directory.Exists(path)) Then
@@ -123,9 +125,11 @@ Public Class frmMain
 
             Dim file As System.IO.StreamWriter
             Try
-                file = My.Computer.FileSystem.OpenTextFileWriter(path + "\wallet.aro", False)
+                Dim fstream As FileStream = New FileStream(path + "\wallet.aro", FileMode.Create)
+                file = New StreamWriter(fstream, Encoding.ASCII)
                 file.WriteLine(wallet)
                 file.Close()
+                fstream.Close()
             Catch ex As Exception
                 MsgBox("Could not write the wallet file. Please check the permissions on " + path + "\wallet.aro", vbCritical)
                 End
@@ -386,6 +390,15 @@ Public Class frmMain
 
             Dim info As String
             info = FormatNumber(sum, 8).Replace(",", "") + "-" + FormatNumber(f, 8).Replace(",", "") + "-" + sendTo.Text + "-" + sendMsg.Text + "-1-" + public_key + "-" + uTime.ToString
+            ' Console.WriteLine(info)
+            Dim file As System.IO.StreamWriter
+            Try
+                file = My.Computer.FileSystem.OpenTextFileWriter("aro.log", True)
+                file.WriteLine(info)
+                file.Close()
+            Catch ex As Exception
+
+            End Try
 
             Dim res As String
             Static Generator As System.Random = New System.Random()
@@ -413,7 +426,7 @@ Public Class frmMain
             Dim sig As String = SimpleBase.Base58.Bitcoin.Encode(signature)
 
 
-            res = get_json(peer + "/api.php?q=send&version=1&public_key=" + public_key + "&signature=" + sig + "&dst=" + sendTo.Text + "&val=" + FormatNumber(sum, 8) + "&date=" + uTime.ToString + "&message=" + sendMsg.Text)
+            res = get_json(peer + "/api.php?q=send&version=1&public_key=" + public_key + "&signature=" + sig + "&dst=" + sendTo.Text + "&val=" + FormatNumber(sum, 8).Replace(",", "") + "&date=" + uTime.ToString + "&message=" + sendMsg.Text)
 
             If res.ToString = "" Then
                 MsgBox("Could not send the transaction to the peer! Please try again!", vbCritical)
@@ -448,9 +461,11 @@ Public Class frmMain
         End If
         Dim file As System.IO.StreamWriter
         Try
-            file = My.Computer.FileSystem.OpenTextFileWriter(path + "\wallet.aro", False)
+            Dim fstream As FileStream = New FileStream(path + "\wallet.aro", FileMode.Create)
+            file = New StreamWriter(fstream, Encoding.ASCII)
             file.WriteLine(wallet)
             file.Close()
+            fstream.Close()
         Catch ex As Exception
             MsgBox(ex.ToString)
             MsgBox("Could not write the wallet file. Please check the permissions on " + path + "\wallet.aro. Also, please save a backup of the current wallet in a different location.", vbCritical)
@@ -476,13 +491,17 @@ Public Class frmMain
                 wallet = encryptedWallet
             Else
                 wallet = "arionum:" + private_key + ":" + public_key
+
             End If
-            '
+
             Dim file As System.IO.StreamWriter
             Try
-                file = My.Computer.FileSystem.OpenTextFileWriter(SaveFileDialog1.FileName, False)
+
+                Dim fstream As FileStream = New FileStream(SaveFileDialog1.FileName, FileMode.Create)
+                file = New StreamWriter(fstream, Encoding.ASCII)
                 file.WriteLine(wallet)
                 file.Close()
+                fstream.Close()
             Catch ex As Exception
                 MsgBox("Could not write the wallet file. Please check the permissions on " + SaveFileDialog1.FileName, vbCritical)
             End Try
@@ -571,11 +590,14 @@ Public Class frmMain
                     Else
                         wallet = "arionum:" + private_key + ":" + public_key
                     End If
-
                     Try
-                        file = My.Computer.FileSystem.OpenTextFileWriter(path + "\wallet.aro", False)
+
+                        Dim fstream As FileStream = New FileStream(path + "\wallet.aro", FileMode.Create)
+                        file = New StreamWriter(fstream, Encoding.ASCII)
                         file.WriteLine(wallet)
                         file.Close()
+                        fstream.Close()
+
                     Catch ex As Exception
                         MsgBox("Could not write the wallet file. Please check the permissions on " + path + "\wallet.aro. Restore failed.", vbCritical)
                         Exit Sub
@@ -622,5 +644,106 @@ Public Class frmMain
     Private Sub DataGridView1_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles DataGridView1.DataError
         e.ThrowException = False
 
+    End Sub
+
+    Private Sub miner_button_Click(sender As Object, e As EventArgs) Handles miner_button.Click
+        If miner_button.Text = "Start Mining" Then
+            miner_button.Text = "Stop"
+            miner_pool.Enabled = False
+            miner_threads.Enabled = False
+            min_pool = miner_pool.Text.Trim
+            If miner_pm.Checked = True Then
+                min_pm = True
+            Else
+                MsgBox("You are solo mining against this node. If you do not own this node and do not have a secure connection to it, you should stop imediatly as your private key would be sent to it when generating a block!", vbCritical)
+                min_pm = False
+            End If
+            miner_update()
+            pool_update.Enabled = True
+            min_threads = Int(miner_threads.Text)
+
+            If (min_threads > 32) Then min_threads = 32
+            For i = 0 To min_threads - 1
+                min_thread(i) = New Thread(AddressOf miner)
+                min_thread(i).IsBackground = True
+                thd_ids(i) = min_thread(i).ManagedThreadId
+                min_thread(i).Start()
+
+            Next
+            min_log("Starting to mine with " & min_threads & " threads")
+        Else
+            miner_button.Text = "Start Mining"
+            miner_pool.Enabled = True
+            miner_threads.Enabled = True
+            pool_update.Enabled = False
+            For i = 0 To min_threads - 1
+                min_thread(i).Abort()
+            Next
+            For i = 0 To 128
+                thd_speeds(i) = 0
+                thd_ids(i) = 0
+            Next
+            min_log("Stopped mining")
+        End If
+
+    End Sub
+
+    Private Sub pool_update_Tick(sender As Object, e As EventArgs) Handles pool_update.Tick
+        miner_update()
+        Dim speed As Decimal = 0
+
+        For i = 0 To 128
+            speed = speed + thd_speeds(i)
+        Next
+
+
+
+        If miner_log.Lines.Count > 200 Then
+            miner_log.Text = ""
+        End If
+        If (speed > 0 And speed <> min_last_speed) Then
+            min_last_speed = speed
+            min_log("Hashing speed: " & speed & " H/s")
+        End If
+        If min_buffer <> "" Then
+            min_log(min_buffer.Trim)
+            min_buffer = ""
+        End If
+    End Sub
+
+    Public Sub min_log(ByVal log As String)
+
+        miner_log.Text = log & vbCrLf & miner_log.Text
+    End Sub
+
+
+
+    Private Sub frmMain_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        If e.KeyData = 196692 And testnet = False Then
+            Dim tmp
+            testnet = True
+            MsgBox("TestNet Enabled")
+            Dim peer_data As String
+            peer_data = http_get("http://api.arionum.com/testnet.txt")
+            'tmp = RegularExpressions.Regex.Split(peer_data, Environment.NewLine)
+            Dim arg() As String = {vbCrLf, vbLf}
+            tmp = peer_data.Split(arg, StringSplitOptions.None)
+            peer_data = ""
+
+
+            total_peers = 0
+            For Each t As String In tmp
+                If total_peers > 99 Then Exit For
+
+                t = t.Trim()
+                If t <> "" Then
+                    peers(total_peers) = t
+                    total_peers = total_peers + 1
+                End If
+            Next
+            miner_pool.Text = peers(0)
+            miner_pm.Checked = False
+            sync_data()
+        End If
     End Sub
 End Class

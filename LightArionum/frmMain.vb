@@ -29,6 +29,7 @@ Imports Org.BouncyCastle.OpenSsl
 Imports Org.BouncyCastle.Security
 Imports System.Threading
 Imports System.Text
+Imports System.Globalization
 
 Public Class frmMain
     Dim min_thread(32) As Thread
@@ -93,6 +94,7 @@ Public Class frmMain
     End Function
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Application.CurrentCulture = New CultureInfo("EN-US")
 
 
         System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = False

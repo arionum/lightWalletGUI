@@ -65,12 +65,27 @@ Partial Class frmMain
         Me.txtpriv = New System.Windows.Forms.TextBox()
         Me.txtpub = New System.Windows.Forms.TextBox()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.miner_pm = New System.Windows.Forms.CheckBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.miner_log = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.miner_threads = New System.Windows.Forms.TextBox()
         Me.miner_pool = New System.Windows.Forms.TextBox()
         Me.miner_button = New System.Windows.Forms.Button()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
@@ -82,26 +97,11 @@ Partial Class frmMain
         Me.ToolStripStatusLabel4 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.statusBlock = New System.Windows.Forms.ToolStripStatusLabel()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button2 = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.pool_update = New System.Windows.Forms.Timer(Me.components)
-        Me.miner_pm = New System.Windows.Forms.CheckBox()
-        Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Label2 = New System.Windows.Forms.Label()
         Label4 = New System.Windows.Forms.Label()
         Me.TabPage2.SuspendLayout()
@@ -110,9 +110,9 @@ Partial Class frmMain
         Me.TabControl1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage4.SuspendLayout()
+        Me.TabPage5.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage5.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label2
@@ -325,12 +325,15 @@ Partial Class frmMain
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.AllowUserToOrderColumns = True
         Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column5, Me.Column1, Me.Column3, Me.Column4, Me.Confirmations, Me.From, Me.Column2, Me.Column6, Me.ID})
         Me.DataGridView1.Location = New System.Drawing.Point(9, 68)
         Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ShowCellErrors = False
+        Me.DataGridView1.ShowRowErrors = False
         Me.DataGridView1.Size = New System.Drawing.Size(923, 362)
         Me.DataGridView1.TabIndex = 5
         '
@@ -506,6 +509,18 @@ Partial Class frmMain
         Me.TabPage4.Text = "Miner"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
+        'miner_pm
+        '
+        Me.miner_pm.AutoSize = True
+        Me.miner_pm.Checked = True
+        Me.miner_pm.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.miner_pm.Location = New System.Drawing.Point(495, 61)
+        Me.miner_pm.Name = "miner_pm"
+        Me.miner_pm.Size = New System.Drawing.Size(92, 19)
+        Me.miner_pm.TabIndex = 10
+        Me.miner_pm.Text = "Pool Mining"
+        Me.miner_pm.UseVisualStyleBackColor = True
+        '
         'Label17
         '
         Me.Label17.AutoSize = True
@@ -557,6 +572,142 @@ Partial Class frmMain
         Me.miner_button.TabIndex = 0
         Me.miner_button.Text = "Start Mining"
         Me.miner_button.UseVisualStyleBackColor = True
+        '
+        'TabPage5
+        '
+        Me.TabPage5.Controls.Add(Me.Label23)
+        Me.TabPage5.Controls.Add(Me.TextBox5)
+        Me.TabPage5.Controls.Add(Me.Label22)
+        Me.TabPage5.Controls.Add(Me.Label21)
+        Me.TabPage5.Controls.Add(Me.Label20)
+        Me.TabPage5.Controls.Add(Me.Label19)
+        Me.TabPage5.Controls.Add(Me.TextBox4)
+        Me.TabPage5.Controls.Add(Me.TextBox3)
+        Me.TabPage5.Controls.Add(Me.TextBox2)
+        Me.TabPage5.Controls.Add(Me.TextBox1)
+        Me.TabPage5.Controls.Add(Me.Label18)
+        Me.TabPage5.Controls.Add(Me.Label15)
+        Me.TabPage5.Controls.Add(Me.Label13)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 24)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Size = New System.Drawing.Size(938, 434)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "About"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(3, 307)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(32, 15)
+        Me.Label23.TabIndex = 12
+        Me.Label23.Text = "BCH"
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(6, 325)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(911, 21)
+        Me.TextBox5.TabIndex = 11
+        Me.TextBox5.Text = "qrtkqrl3mxzdzl66nchkgdv73uu3rf7jdy7el2vduw"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(3, 263)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(31, 15)
+        Me.Label22.TabIndex = 10
+        Me.Label22.Text = "ETH"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(3, 218)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(30, 15)
+        Me.Label21.TabIndex = 9
+        Me.Label21.Text = "BTC"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(3, 175)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(29, 15)
+        Me.Label20.TabIndex = 8
+        Me.Label20.Text = "LTC"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(3, 128)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(32, 15)
+        Me.Label19.TabIndex = 7
+        Me.Label19.Text = "ARO"
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(6, 281)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(911, 21)
+        Me.TextBox4.TabIndex = 6
+        Me.TextBox4.Text = "0x4B904bDf071E9b98441d25316c824D7b7E447527"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(6, 236)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(911, 21)
+        Me.TextBox3.TabIndex = 5
+        Me.TextBox3.Text = "1LdoMmYitb4C3pXoGNLL1VRj7xk3smGXoU"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(6, 193)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(911, 21)
+        Me.TextBox2.TabIndex = 4
+        Me.TextBox2.Text = "LWgqzbXGeucKaMmJEvwaAWPFrAgKiJ4Y4m"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(6, 146)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(911, 21)
+        Me.TextBox1.TabIndex = 3
+        Me.TextBox1.Text = "5WuRMXGM7Pf8NqEArVz1NxgSBptkimSpvuSaYC79g1yo3RDQc8TjVtGH5chQWQV7CHbJEuq9DmW5fbmCE" &
+    "W4AghQr"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(3, 100)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(551, 15)
+        Me.Label18.TabIndex = 2
+        Me.Label18.Text = "If you would like to support the Arionum development, you can donate to one of th" &
+    "e addresses below:"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(3, 72)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(824, 15)
+        Me.Label15.TabIndex = 1
+        Me.Label15.Text = "There has been no PRE-MINE or ICO  on Arionum, the development has been done and " &
+    "will always be done free of charge by the Arionum Developers."
+        '
+        'Label13
+        '
+        Me.Label13.Location = New System.Drawing.Point(3, 15)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(914, 57)
+        Me.Label13.TabIndex = 0
+        Me.Label13.Text = resources.GetString("Label13.Text")
         '
         'Label1
         '
@@ -629,16 +780,6 @@ Partial Class frmMain
         '
         Me.SaveFileDialog1.FileName = "wallet.aro"
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.LightArionum.My.Resources.Resources.sigla_arionum
-        Me.PictureBox1.Location = New System.Drawing.Point(13, 2)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(100, 83)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 7
-        Me.PictureBox1.TabStop = False
-        '
         'Timer1
         '
         Me.Timer1.Enabled = True
@@ -662,153 +803,15 @@ Partial Class frmMain
         '
         Me.pool_update.Interval = 2000
         '
-        'miner_pm
+        'PictureBox1
         '
-        Me.miner_pm.AutoSize = True
-        Me.miner_pm.Checked = True
-        Me.miner_pm.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.miner_pm.Location = New System.Drawing.Point(495, 61)
-        Me.miner_pm.Name = "miner_pm"
-        Me.miner_pm.Size = New System.Drawing.Size(92, 19)
-        Me.miner_pm.TabIndex = 10
-        Me.miner_pm.Text = "Pool Mining"
-        Me.miner_pm.UseVisualStyleBackColor = True
-        '
-        'TabPage5
-        '
-        Me.TabPage5.Controls.Add(Me.Label23)
-        Me.TabPage5.Controls.Add(Me.TextBox5)
-        Me.TabPage5.Controls.Add(Me.Label22)
-        Me.TabPage5.Controls.Add(Me.Label21)
-        Me.TabPage5.Controls.Add(Me.Label20)
-        Me.TabPage5.Controls.Add(Me.Label19)
-        Me.TabPage5.Controls.Add(Me.TextBox4)
-        Me.TabPage5.Controls.Add(Me.TextBox3)
-        Me.TabPage5.Controls.Add(Me.TextBox2)
-        Me.TabPage5.Controls.Add(Me.TextBox1)
-        Me.TabPage5.Controls.Add(Me.Label18)
-        Me.TabPage5.Controls.Add(Me.Label15)
-        Me.TabPage5.Controls.Add(Me.Label13)
-        Me.TabPage5.Location = New System.Drawing.Point(4, 24)
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(938, 434)
-        Me.TabPage5.TabIndex = 4
-        Me.TabPage5.Text = "About"
-        Me.TabPage5.UseVisualStyleBackColor = True
-        '
-        'Label13
-        '
-        Me.Label13.Location = New System.Drawing.Point(3, 15)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(914, 57)
-        Me.Label13.TabIndex = 0
-        Me.Label13.Text = resources.GetString("Label13.Text")
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(3, 72)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(824, 15)
-        Me.Label15.TabIndex = 1
-        Me.Label15.Text = "There has been no PRE-MINE or ICO  on Arionum, the development has been done and " &
-    "will always be done free of charge by the Arionum Developers."
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(3, 100)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(551, 15)
-        Me.Label18.TabIndex = 2
-        Me.Label18.Text = "If you would like to support the Arionum development, you can donate to one of th" &
-    "e addresses below:"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(6, 146)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(911, 21)
-        Me.TextBox1.TabIndex = 3
-        Me.TextBox1.Text = "5WuRMXGM7Pf8NqEArVz1NxgSBptkimSpvuSaYC79g1yo3RDQc8TjVtGH5chQWQV7CHbJEuq9DmW5fbmCE" &
-    "W4AghQr"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(6, 193)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(911, 21)
-        Me.TextBox2.TabIndex = 4
-        Me.TextBox2.Text = "LWgqzbXGeucKaMmJEvwaAWPFrAgKiJ4Y4m"
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(6, 236)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(911, 21)
-        Me.TextBox3.TabIndex = 5
-        Me.TextBox3.Text = "1LdoMmYitb4C3pXoGNLL1VRj7xk3smGXoU"
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Location = New System.Drawing.Point(6, 281)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(911, 21)
-        Me.TextBox4.TabIndex = 6
-        Me.TextBox4.Text = "0x4B904bDf071E9b98441d25316c824D7b7E447527"
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(3, 128)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(32, 15)
-        Me.Label19.TabIndex = 7
-        Me.Label19.Text = "ARO"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(3, 175)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(29, 15)
-        Me.Label20.TabIndex = 8
-        Me.Label20.Text = "LTC"
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(3, 218)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(30, 15)
-        Me.Label21.TabIndex = 9
-        Me.Label21.Text = "BTC"
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(3, 263)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(31, 15)
-        Me.Label22.TabIndex = 10
-        Me.Label22.Text = "ETH"
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(3, 307)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(32, 15)
-        Me.Label23.TabIndex = 12
-        Me.Label23.Text = "BCH"
-        '
-        'TextBox5
-        '
-        Me.TextBox5.Location = New System.Drawing.Point(6, 325)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(911, 21)
-        Me.TextBox5.TabIndex = 11
-        Me.TextBox5.Text = "qrtkqrl3mxzdzl66nchkgdv73uu3rf7jdy7el2vduw"
+        Me.PictureBox1.Image = Global.LightArionum.My.Resources.Resources.sigla_arionum
+        Me.PictureBox1.Location = New System.Drawing.Point(13, 2)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(100, 83)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 7
+        Me.PictureBox1.TabStop = False
         '
         'frmMain
         '
@@ -827,7 +830,7 @@ Partial Class frmMain
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmMain"
-        Me.Text = "Arionum LightWallet v0.3a"
+        Me.Text = "Arionum LightWallet v0.3b"
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         Me.TabPage1.ResumeLayout(False)
@@ -838,11 +841,11 @@ Partial Class frmMain
         Me.TabPage3.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
+        Me.TabPage5.ResumeLayout(False)
+        Me.TabPage5.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage5.ResumeLayout(False)
-        Me.TabPage5.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -183,6 +183,9 @@
   <metadata name="miner_log.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="Label13.Text" xml:space="preserve">
+    <value>Arionum was designed with the future in mind, in a market where the growth beats all expectations. Arionum  aims to offer a secure electronic payments system that is able to scale without a degraded performance or a degraded user experience. It offers a fixed 0.25% fee (maximum 10 ARO) on all transactions and it has a dynamic transaction limit per block, allowing it to keep up with a growing number of transactions at all times. </value>
+  </data>
   <metadata name="StatusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -198,9 +201,6 @@
   <metadata name="pool_update.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>502, 17</value>
   </metadata>
-  <data name="Label13.Text" xml:space="preserve">
-    <value>Arionum was designed with the future in mind, in a market where the growth beats all expectations. Arionum  aims to offer a secure electronic payments system that is able to scale without a degraded performance or a degraded user experience. It offers a fixed 0.25% fee (maximum 10 ARO) on all transactions and it has a dynamic transaction limit per block, allowing it to keep up with a growing number of transactions at all times. </value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

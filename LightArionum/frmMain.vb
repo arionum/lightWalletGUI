@@ -37,8 +37,9 @@ Public Class frmMain
     Dim i As Integer
     Private trd As Thread
     Public Async Function sync_data() As Task
-        Try
 
+        Try
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("EN-US")
 
             If sync_err > 5 Then
                 MsgBox("Could not sync data. Attempted 5 times to connect to the nodes", vbCritical)
@@ -78,14 +79,17 @@ Public Class frmMain
             If res.ToString = "" Then
                 Exit Function
             End If
-            Me.DataGridView1.Rows.Clear()
+            DataGridView1.Rows.Clear()
+
 
             For Each x In res
                 Dim nTimestamp As Double = x("date")
                 Dim nDateTime As System.DateTime = New System.DateTime(1970, 1, 1, 0, 0, 0, 0)
                 nDateTime = nDateTime.AddSeconds(nTimestamp)
 
+
                 Me.DataGridView1.Rows.Add(nDateTime.ToString("MM\/dd\/yyyy HH:mm"), x("type"), x("val"), x("fee"), x("confirmations"), x("src"), x("dst"), x("message"), x("id"))
+
             Next
         Catch ex As Exception
             MsgBox("Could not sync data: " & ex.Message, vbCritical)
@@ -407,6 +411,7 @@ Public Class frmMain
             Dim info As String
             info = FormatNumber(sum, 8).Replace(",", "") + "-" + FormatNumber(f, 8).Replace(",", "") + "-" + sendTo.Text + "-" + sendMsg.Text + "-1-" + public_key + "-" + uTime.ToString
             ' Console.WriteLine(info)
+            frmLog.flog("Transaction data: " & info)
             Dim file As System.IO.StreamWriter
             Try
                 file = My.Computer.FileSystem.OpenTextFileWriter("aro.log", True)
@@ -445,8 +450,14 @@ Public Class frmMain
             res = get_json(peer + "/api.php?q=send&version=1&public_key=" + public_key + "&signature=" + sig + "&dst=" + sendTo.Text + "&val=" + FormatNumber(sum, 8).Replace(",", "") + "&date=" + uTime.ToString + "&message=" + sendMsg.Text)
 
             If res.ToString = "" Then
-                MsgBox("Could not send the transaction to the peer! Please try again!", vbCritical)
-                Exit Sub
+                r = Generator.Next(0, total_peers - 1)
+                peer = peers(r)
+
+                res = get_json(peer + "/api.php?q=send&version=1&public_key=" + public_key + "&signature=" + sig + "&dst=" + sendTo.Text + "&val=" + FormatNumber(sum, 8).Replace(",", "") + "&date=" + uTime.ToString + "&message=" + sendMsg.Text)
+                If res.ToString = "" Then
+                    MsgBox("Could not send the transaction to the peer (" & peer & ")! Please try again!", vbCritical)
+                    Exit Sub
+                End If
             End If
             lasttx.Visible = True
             lbllasttx.Visible = True
@@ -534,6 +545,9 @@ Public Class frmMain
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        sync_data()
+
+        Exit Sub
         Try
             If trd.IsAlive = False Then
                 trd = New Thread(AddressOf sync_data)
@@ -634,15 +648,20 @@ Public Class frmMain
 
                     Dim sha512hasher As New System.Security.Cryptography.SHA512Managed()
 
+                    'Console.WriteLine(public_key)
 
                     enc = encoder.GetBytes(public_key)
                     For i = 0 To 8
+                        'Console.WriteLine(SimpleBase.Base58.Bitcoin.Encode(enc))
                         enc = sha512hasher.ComputeHash(enc)
                     Next
-
-
+                    Dim xx As Byte() = SimpleBase.Base58.Bitcoin.Decode("11111" & SimpleBase.Base58.Bitcoin.Encode(enc))
+                    For i = 0 To xx.Count - 1
+                        Console.Write(Convert.ToInt16(xx(i)) & " ")
+                    Next
 
                     address = SimpleBase.Base58.Bitcoin.Encode(enc)
+                    Console.WriteLine(address)
                     txtaddress.Text = address
                     If trd.IsAlive = False Then
                         trd = New Thread(AddressOf sync_data)
@@ -659,7 +678,7 @@ Public Class frmMain
 
     Private Sub DataGridView1_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles DataGridView1.DataError
         e.ThrowException = False
-
+        Console.WriteLine(e.ToString)
     End Sub
 
     Private Sub miner_button_Click(sender As Object, e As EventArgs) Handles miner_button.Click
@@ -705,26 +724,32 @@ Public Class frmMain
     End Sub
 
     Private Sub pool_update_Tick(sender As Object, e As EventArgs) Handles pool_update.Tick
-        miner_update()
-        Dim speed As Decimal = 0
-
-        For i = 0 To 128
-            speed = speed + thd_speeds(i)
-        Next
+        Try
 
 
+            miner_update()
+            Dim speed As Decimal = 0
 
-        If miner_log.Lines.Count > 200 Then
-            miner_log.Text = ""
-        End If
-        If (speed > 0 And speed <> min_last_speed) Then
-            min_last_speed = speed
-            min_log("Hashing speed: " & speed & " H/s")
-        End If
-        If min_buffer <> "" Then
-            min_log(min_buffer.Trim)
-            min_buffer = ""
-        End If
+            For i = 0 To 128
+                speed = speed + thd_speeds(i)
+            Next
+
+
+
+            If miner_log.Lines.Count > 200 Then
+                miner_log.Text = ""
+            End If
+            If (speed > 0 And speed <> min_last_speed) Then
+                min_last_speed = speed
+                min_log("Hashing speed: " & speed & " H/s")
+            End If
+            If min_buffer <> "" Then
+                min_log(min_buffer.Trim)
+                min_buffer = ""
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Public Sub min_log(ByVal log As String)
@@ -735,7 +760,9 @@ Public Class frmMain
 
 
     Private Sub frmMain_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        If e.KeyData = 196692 And testnet = False Then
+        If e.KeyData = 196684 Then
+            frmLog.Show()
+        ElseIf e.KeyData = 196692 And testnet = False Then
             Dim tmp
             testnet = True
             MsgBox("TestNet Enabled")

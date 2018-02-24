@@ -64,6 +64,7 @@ Module Module1
     Public min_buffer As String
     Public testnet = False
     Public min_pm As Boolean
+    Public last_hr As Int64
     Public Function pem2coin(ByVal data As String)
         data = Replace(data, "-----BEGIN PUBLIC KEY-----", "")
         data = Replace(data, "-----END PUBLIC KEY-----", "")
@@ -174,7 +175,7 @@ Module Module1
         Dim reader As StreamReader
 
         Try
-
+            frmLog.flog("Requesting: " & url)
 
             request = DirectCast(WebRequest.Create(url), HttpWebRequest)
 
@@ -184,9 +185,11 @@ Module Module1
             Dim rawresp As String
             rawresp = reader.ReadToEnd()
             '   Console.WriteLine(rawresp)
+            frmLog.flog("Response: " & rawresp.Trim())
             Return rawresp.Trim()
         Catch ex As Exception
             Console.WriteLine(ex.ToString)
+            frmLog.flog("Exception: " & ex.ToString)
             Return ""
         End Try
     End Function
@@ -314,7 +317,7 @@ err:
     Public Async Function miner() As Task
 
         Try
-
+            Thread.CurrentThread.CurrentCulture = New Globalization.CultureInfo("EN-US")
             Dim hasher As PasswordHasher = New PasswordHasher(1, 524288, 1)
             Dim nonce As String = generate_nonce()
             Dim j As Integer
@@ -371,7 +374,15 @@ err:
         End Try
     End Function
     Public Function miner_update()
-        Dim res = get_json(min_pool & "/mine.php?q=info&address=" & address & "&hashrate=" & min_speed & "&worker=lightwallet")
+        Dim purl As String = min_pool & "/mine.php?q=info&address=" & address & "&worker=lightwallet"
+
+        Dim uTime As Int64
+        uTime = (DateTime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds
+        If uTime - last_hr > 600 Then
+            purl = purl & "&hashrate=" & min_speed
+            last_hr = uTime
+        End If
+        Dim res = get_json(purl)
         If res.ToString <> "" Then
             min_block = res("block")
             min_diff = res("difficulty")

@@ -118,13 +118,43 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="sigla arionum" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sigla arionum.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgBG.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnDkBlueRd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnDkBlueRd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="arionum__2_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arionum (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgXclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgXclose.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="libargon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\libargon2.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="sigla arionum" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sigla arionum.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imgBGDecrypt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgBGDecrypt.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnDkBlueRd12040" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnDkBlueRd12040.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgBG2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgBG2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgBGEncrypt293233" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgBGEncrypt293233.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnDarkBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnDarkBlue.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnDkBlueRdBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnDkBlueRdBig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgfade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgfade.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

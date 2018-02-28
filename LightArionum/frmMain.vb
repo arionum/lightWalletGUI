@@ -272,6 +272,7 @@ Public Class frmMain
         trd = New Thread(AddressOf sync_data)
         trd.IsBackground = True
         trd.Start()
+
     End Sub
 
     Private Sub InitializeComponent(asdas)
@@ -790,7 +791,30 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+    Private Sub Label1_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub txtaddress_TextChanged(sender As Object, e As EventArgs) Handles txtaddress.TextChanged
+
+    End Sub
+
+    Private Sub Label19_Click(sender As Object, e As EventArgs) Handles Label19.Click
+
+    End Sub
+
+    Private Sub btnDrag_Click(sender As Object, e As EventArgs)
+    End Sub
+
+    Private Sub Label15_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
+
+    End Sub
+
+    Private Sub Label14_Click(sender As Object, e As EventArgs) Handles Label14.Click
 
     End Sub
 End Class

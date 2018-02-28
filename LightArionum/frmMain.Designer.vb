@@ -239,6 +239,7 @@ Partial Class frmMain
         '
         'Button1
         '
+        Me.Button1.BackColor = System.Drawing.Color.Transparent
         Me.Button1.BackgroundImage = Global.LightArionum.My.Resources.Resources.btnDkBlueRdBig
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button1.FlatAppearance.BorderSize = 0
@@ -249,7 +250,7 @@ Partial Class frmMain
         Me.Button1.Size = New System.Drawing.Size(166, 61)
         Me.Button1.TabIndex = 11
         Me.Button1.Text = "Send Transaction"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'sendMsg
         '

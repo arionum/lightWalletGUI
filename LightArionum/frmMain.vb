@@ -30,12 +30,28 @@ Imports Org.BouncyCastle.Security
 Imports System.Threading
 Imports System.Text
 Imports System.Globalization
+Imports QRCoder
 
 Public Class frmMain
     Dim min_thread(32) As Thread
     Dim min_last_speed As Decimal
     Dim i As Integer
     Private trd As Thread
+
+    Private Const HTCLIENT As Integer = &H1
+    Private Const HTCAPTION As Integer = &H2
+    Private Const WM_NCHITTEST As Integer = &H84
+
+    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+        MyBase.WndProc(m)
+
+        If m.Msg = WM_NCHITTEST AndAlso m.Result = HTCLIENT Then
+            m.Result = HTCAPTION
+        End If
+    End Sub
+
+
+
     Public Async Function sync_data() As Task
 
         Try
@@ -272,7 +288,11 @@ Public Class frmMain
         trd = New Thread(AddressOf sync_data)
         trd.IsBackground = True
         trd.Start()
-
+        Dim qrGenerator As New QRCodeGenerator
+        Dim QRCodeData As QRCodeData = qrGenerator.CreateQrCode(address & "|" & public_key & "|" & private_key, QRCodeGenerator.ECCLevel.Q)
+        Dim QRCode As New QRCode(QRCodeData)
+        Dim qrCodeImage As Bitmap = QRCode.GetGraphic(20)
+        PictureBox1.Image = qrCodeImage
     End Sub
 
     Private Sub InitializeComponent(asdas)
@@ -815,6 +835,38 @@ Public Class frmMain
     End Sub
 
     Private Sub Label14_Click(sender As Object, e As EventArgs) Handles Label14.Click
+
+    End Sub
+
+    Private Sub TabPage3_Click(sender As Object, e As EventArgs) Handles TabPage3.Click
+
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        frmQR.PictureBox1.Image = PictureBox1.Image
+        frmQR.ShowDialog()
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim val = InputBox("Please enter the value in ARO")
+        If IsNumeric(val) Then
+            If val > 0 Then
+
+
+                Dim msg = InputBox("Please enter the transaction message (optional)")
+                If msg.Length > 0 Then
+                    msg = "|" & msg
+                End If
+                Dim qr As String = "arosend|" & address & "|" & val & msg
+                Dim qrGenerator As New QRCodeGenerator
+                Dim QRCodeData As QRCodeData = qrGenerator.CreateQrCode(qr, QRCodeGenerator.ECCLevel.Q)
+                Dim QRCode As New QRCode(QRCodeData)
+                Dim qrCodeImage As Bitmap = QRCode.GetGraphic(20)
+                frmQR.PictureBox1.Image = qrCodeImage
+                frmQR.ShowDialog()
+                'MsgBox(qr)
+            End If
+        End If
 
     End Sub
 End Class

@@ -60,6 +60,8 @@ Partial Class frmMain
         Me.txtaddress = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -100,6 +102,7 @@ Partial Class frmMain
         Me.Button2 = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.pool_update = New System.Windows.Forms.Timer(Me.components)
+        Me.Button3 = New System.Windows.Forms.Button()
         Label2 = New System.Windows.Forms.Label()
         Label4 = New System.Windows.Forms.Label()
         Me.TabPage2.SuspendLayout()
@@ -108,6 +111,7 @@ Partial Class frmMain
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage4.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -117,10 +121,10 @@ Partial Class frmMain
         '
         Label2.AutoSize = True
         Label2.BackColor = System.Drawing.Color.Transparent
-        Label2.Font = New System.Drawing.Font("Roboto", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Label2.Location = New System.Drawing.Point(139, 65)
         Label2.Name = "Label2"
-        Label2.Size = New System.Drawing.Size(71, 14)
+        Label2.Size = New System.Drawing.Size(71, 15)
         Label2.TabIndex = 2
         Label2.Text = "Pool / Node"
         '
@@ -128,10 +132,10 @@ Partial Class frmMain
         '
         Label4.AutoSize = True
         Label4.BackColor = System.Drawing.Color.Transparent
-        Label4.Font = New System.Drawing.Font("Roboto", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Label4.Location = New System.Drawing.Point(159, 94)
         Label4.Name = "Label4"
-        Label4.Size = New System.Drawing.Size(51, 14)
+        Label4.Size = New System.Drawing.Size(52, 15)
         Label4.TabIndex = 3
         Label4.Text = "Threads"
         '
@@ -157,7 +161,7 @@ Partial Class frmMain
         Me.btnDecrypt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnDecrypt.FlatAppearance.BorderSize = 0
         Me.btnDecrypt.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDecrypt.Font = New System.Drawing.Font("Roboto", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDecrypt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDecrypt.ForeColor = System.Drawing.SystemColors.ButtonShadow
         Me.btnDecrypt.Location = New System.Drawing.Point(792, 18)
         Me.btnDecrypt.Name = "btnDecrypt"
@@ -173,7 +177,7 @@ Partial Class frmMain
         Me.btnExport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnExport.FlatAppearance.BorderSize = 0
         Me.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExport.Font = New System.Drawing.Font("Roboto", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExport.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExport.ForeColor = System.Drawing.SystemColors.ButtonShadow
         Me.btnExport.Location = New System.Drawing.Point(668, 18)
         Me.btnExport.Name = "btnExport"
@@ -200,7 +204,7 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.Label10)
         Me.TabPage2.Controls.Add(Me.Label9)
         Me.TabPage2.Controls.Add(Me.sendTo)
-        Me.TabPage2.Font = New System.Drawing.Font("Roboto", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage2.Location = New System.Drawing.Point(4, 26)
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(0)
         Me.TabPage2.Name = "TabPage2"
@@ -212,10 +216,10 @@ Partial Class frmMain
         '
         Me.lbllasttx.AutoSize = True
         Me.lbllasttx.BackColor = System.Drawing.Color.Transparent
-        Me.lbllasttx.Font = New System.Drawing.Font("Roboto", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbllasttx.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbllasttx.Location = New System.Drawing.Point(371, 352)
         Me.lbllasttx.Name = "lbllasttx"
-        Me.lbllasttx.Size = New System.Drawing.Size(139, 14)
+        Me.lbllasttx.Size = New System.Drawing.Size(141, 15)
         Me.lbllasttx.TabIndex = 14
         Me.lbllasttx.Text = "Success! Transaction ID:"
         Me.lbllasttx.Visible = False
@@ -225,7 +229,7 @@ Partial Class frmMain
         Me.lasttx.Location = New System.Drawing.Point(126, 372)
         Me.lasttx.MaxLength = 250
         Me.lasttx.Name = "lasttx"
-        Me.lasttx.Size = New System.Drawing.Size(662, 22)
+        Me.lasttx.Size = New System.Drawing.Size(662, 21)
         Me.lasttx.TabIndex = 13
         Me.lasttx.Visible = False
         '
@@ -234,7 +238,7 @@ Partial Class frmMain
         Me.sendAmt.Location = New System.Drawing.Point(178, 138)
         Me.sendAmt.MaxLength = 15
         Me.sendAmt.Name = "sendAmt"
-        Me.sendAmt.Size = New System.Drawing.Size(103, 22)
+        Me.sendAmt.Size = New System.Drawing.Size(103, 21)
         Me.sendAmt.TabIndex = 12
         '
         'Button1
@@ -265,39 +269,40 @@ Partial Class frmMain
         '
         Me.Label14.AutoSize = True
         Me.Label14.BackColor = System.Drawing.Color.Transparent
-        Me.Label14.Font = New System.Drawing.Font("Roboto", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.Location = New System.Drawing.Point(111, 211)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(58, 14)
+        Me.Label14.Size = New System.Drawing.Size(61, 15)
         Me.Label14.TabIndex = 9
         Me.Label14.Text = "Message:"
         '
         'fee
         '
         Me.fee.AutoSize = True
-        Me.fee.Location = New System.Drawing.Point(354, 159)
+        Me.fee.BackColor = System.Drawing.Color.Transparent
+        Me.fee.Location = New System.Drawing.Point(399, 143)
         Me.fee.Name = "fee"
-        Me.fee.Size = New System.Drawing.Size(0, 14)
+        Me.fee.Size = New System.Drawing.Size(0, 15)
         Me.fee.TabIndex = 8
         '
         'sendFee
         '
         Me.sendFee.AutoSize = True
         Me.sendFee.BackColor = System.Drawing.Color.Transparent
-        Me.sendFee.Font = New System.Drawing.Font("Roboto", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.sendFee.Location = New System.Drawing.Point(359, 138)
+        Me.sendFee.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sendFee.Location = New System.Drawing.Point(359, 143)
         Me.sendFee.Name = "sendFee"
-        Me.sendFee.Size = New System.Drawing.Size(29, 14)
+        Me.sendFee.Size = New System.Drawing.Size(31, 15)
         Me.sendFee.TabIndex = 7
         Me.sendFee.Text = "Fee:"
         '
         'Label12
         '
         Me.Label12.BackColor = System.Drawing.Color.Transparent
-        Me.Label12.Font = New System.Drawing.Font("Roboto Lt", 12.0!)
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.Label12.Location = New System.Drawing.Point(287, 138)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(40, 22)
+        Me.Label12.Size = New System.Drawing.Size(52, 22)
         Me.Label12.TabIndex = 6
         Me.Label12.Text = "ARO"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -306,10 +311,10 @@ Partial Class frmMain
         '
         Me.Label11.AutoSize = True
         Me.Label11.BackColor = System.Drawing.Color.Transparent
-        Me.Label11.Font = New System.Drawing.Font("Roboto", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.Location = New System.Drawing.Point(120, 140)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(53, 14)
+        Me.Label11.Size = New System.Drawing.Size(52, 15)
         Me.Label11.TabIndex = 5
         Me.Label11.Text = "Amount:"
         '
@@ -317,10 +322,10 @@ Partial Class frmMain
         '
         Me.Label10.AutoSize = True
         Me.Label10.BackColor = System.Drawing.Color.Transparent
-        Me.Label10.Font = New System.Drawing.Font("Roboto", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.Location = New System.Drawing.Point(124, 88)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(45, 14)
+        Me.Label10.Size = New System.Drawing.Size(43, 15)
         Me.Label10.TabIndex = 4
         Me.Label10.Text = "Pay to:"
         '
@@ -328,10 +333,10 @@ Partial Class frmMain
         '
         Me.Label9.AutoSize = True
         Me.Label9.BackColor = System.Drawing.Color.Transparent
-        Me.Label9.Font = New System.Drawing.Font("Roboto Lt", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.Location = New System.Drawing.Point(369, 25)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(181, 25)
+        Me.Label9.Size = New System.Drawing.Size(187, 25)
         Me.Label9.TabIndex = 3
         Me.Label9.Text = "Send Transaction:"
         '
@@ -340,7 +345,7 @@ Partial Class frmMain
         Me.sendTo.Location = New System.Drawing.Point(178, 87)
         Me.sendTo.MaxLength = 128
         Me.sendTo.Name = "sendTo"
-        Me.sendTo.Size = New System.Drawing.Size(610, 22)
+        Me.sendTo.Size = New System.Drawing.Size(610, 21)
         Me.sendTo.TabIndex = 0
         '
         'TabPage1
@@ -350,6 +355,7 @@ Partial Class frmMain
         Me.TabPage1.BackColor = System.Drawing.Color.Transparent
         Me.TabPage1.BackgroundImage = Global.LightArionum.My.Resources.Resources.bgfade
         Me.TabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.TabPage1.Controls.Add(Me.Button3)
         Me.TabPage1.Controls.Add(Me.Panel1)
         Me.TabPage1.Controls.Add(Me.Label5)
         Me.TabPage1.Controls.Add(Me.Label3)
@@ -402,73 +408,73 @@ Partial Class frmMain
         '
         Me.Column5.HeaderText = "Date"
         Me.Column5.Name = "Column5"
-        Me.Column5.Width = 58
+        Me.Column5.Width = 61
         '
         'Column1
         '
         Me.Column1.HeaderText = "Action"
         Me.Column1.Name = "Column1"
-        Me.Column1.Width = 67
+        Me.Column1.Width = 69
         '
         'Column3
         '
         Me.Column3.HeaderText = "Sum"
         Me.Column3.Name = "Column3"
-        Me.Column3.Width = 57
+        Me.Column3.Width = 59
         '
         'Column4
         '
         Me.Column4.HeaderText = "Fee"
         Me.Column4.Name = "Column4"
-        Me.Column4.Width = 52
+        Me.Column4.Width = 56
         '
         'Confirmations
         '
         Me.Confirmations.HeaderText = "Confirmations"
         Me.Confirmations.Name = "Confirmations"
-        Me.Confirmations.Width = 111
+        Me.Confirmations.Width = 113
         '
         'From
         '
         Me.From.HeaderText = "From"
         Me.From.Name = "From"
-        Me.From.Width = 61
+        Me.From.Width = 63
         '
         'Column2
         '
         Me.Column2.HeaderText = "To"
         Me.Column2.Name = "Column2"
-        Me.Column2.Width = 46
+        Me.Column2.Width = 49
         '
         'Column6
         '
         Me.Column6.HeaderText = "Message"
         Me.Column6.Name = "Column6"
-        Me.Column6.Width = 84
+        Me.Column6.Width = 89
         '
         'ID
         '
         Me.ID.HeaderText = "ID"
         Me.ID.Name = "ID"
-        Me.ID.Width = 44
+        Me.ID.Width = 45
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(3, 66)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(86, 15)
+        Me.Label5.Size = New System.Drawing.Size(89, 16)
         Me.Label5.TabIndex = 3
         Me.Label5.Text = "Transactions:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Label3.Location = New System.Drawing.Point(111, 21)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(108, 19)
+        Me.Label3.Size = New System.Drawing.Size(108, 20)
         Me.Label3.TabIndex = 1
         Me.Label3.Text = "Your address:"
         '
@@ -477,7 +483,7 @@ Partial Class frmMain
         Me.txtaddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtaddress.Location = New System.Drawing.Point(219, 20)
         Me.txtaddress.Name = "txtaddress"
-        Me.txtaddress.Size = New System.Drawing.Size(610, 23)
+        Me.txtaddress.Size = New System.Drawing.Size(610, 22)
         Me.txtaddress.TabIndex = 0
         '
         'TabControl1
@@ -488,7 +494,7 @@ Partial Class frmMain
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Controls.Add(Me.TabPage5)
-        Me.TabControl1.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.ItemSize = New System.Drawing.Size(186, 22)
         Me.TabControl1.Location = New System.Drawing.Point(9, 54)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(0)
@@ -505,6 +511,8 @@ Partial Class frmMain
         Me.TabPage3.BackColor = System.Drawing.Color.White
         Me.TabPage3.BackgroundImage = Global.LightArionum.My.Resources.Resources.bgfade
         Me.TabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.TabPage3.Controls.Add(Me.PictureBox1)
+        Me.TabPage3.Controls.Add(Me.Label1)
         Me.TabPage3.Controls.Add(Me.Label8)
         Me.TabPage3.Controls.Add(Me.Label7)
         Me.TabPage3.Controls.Add(Me.Label6)
@@ -516,14 +524,34 @@ Partial Class frmMain
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Wallet info"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(351, 236)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(197, 197)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 6
+        Me.PictureBox1.TabStop = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(30, 236)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(284, 16)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "QR Code to import the wallet on Android or iOS"
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Font = New System.Drawing.Font("Roboto Lt", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(114, 80)
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(114, 17)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(725, 23)
+        Me.Label8.Size = New System.Drawing.Size(722, 24)
         Me.Label8.TabIndex = 4
         Me.Label8.Text = "Keep your private key secure! You can use the following keys to re-create your wa" &
     "llet."
@@ -532,10 +560,10 @@ Partial Class frmMain
         '
         Me.Label7.AutoSize = True
         Me.Label7.BackColor = System.Drawing.Color.Transparent
-        Me.Label7.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(29, 245)
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(29, 134)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(72, 15)
+        Me.Label7.Size = New System.Drawing.Size(75, 16)
         Me.Label7.TabIndex = 3
         Me.Label7.Text = "Private key"
         '
@@ -543,16 +571,16 @@ Partial Class frmMain
         '
         Me.Label6.AutoSize = True
         Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(29, 133)
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(29, 46)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(67, 15)
+        Me.Label6.Size = New System.Drawing.Size(71, 16)
         Me.Label6.TabIndex = 2
         Me.Label6.Text = "Public Key"
         '
         'txtpriv
         '
-        Me.txtpriv.Location = New System.Drawing.Point(33, 261)
+        Me.txtpriv.Location = New System.Drawing.Point(33, 150)
         Me.txtpriv.Multiline = True
         Me.txtpriv.Name = "txtpriv"
         Me.txtpriv.Size = New System.Drawing.Size(864, 72)
@@ -560,7 +588,7 @@ Partial Class frmMain
         '
         'txtpub
         '
-        Me.txtpub.Location = New System.Drawing.Point(32, 150)
+        Me.txtpub.Location = New System.Drawing.Point(32, 63)
         Me.txtpub.Multiline = True
         Me.txtpub.Name = "txtpub"
         Me.txtpub.Size = New System.Drawing.Size(865, 61)
@@ -595,7 +623,7 @@ Partial Class frmMain
         Me.miner_pm.CheckState = System.Windows.Forms.CheckState.Checked
         Me.miner_pm.Location = New System.Drawing.Point(652, 28)
         Me.miner_pm.Name = "miner_pm"
-        Me.miner_pm.Size = New System.Drawing.Size(92, 19)
+        Me.miner_pm.Size = New System.Drawing.Size(97, 20)
         Me.miner_pm.TabIndex = 10
         Me.miner_pm.Text = "Pool Mining"
         Me.miner_pm.UseVisualStyleBackColor = False
@@ -606,7 +634,7 @@ Partial Class frmMain
         Me.Label17.BackColor = System.Drawing.Color.Transparent
         Me.Label17.Location = New System.Drawing.Point(8, 128)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(31, 15)
+        Me.Label17.Size = New System.Drawing.Size(34, 16)
         Me.Label17.TabIndex = 9
         Me.Label17.Text = "Log:"
         '
@@ -626,10 +654,10 @@ Partial Class frmMain
         '
         Me.Label16.AutoSize = True
         Me.Label16.BackColor = System.Drawing.Color.Transparent
-        Me.Label16.Font = New System.Drawing.Font("Roboto Lt", 15.75!)
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!)
         Me.Label16.Location = New System.Drawing.Point(320, 20)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(251, 25)
+        Me.Label16.Size = New System.Drawing.Size(253, 25)
         Me.Label16.TabIndex = 7
         Me.Label16.Text = "Arionum Integrated Miner"
         '
@@ -637,14 +665,14 @@ Partial Class frmMain
         '
         Me.miner_threads.Location = New System.Drawing.Point(216, 91)
         Me.miner_threads.Name = "miner_threads"
-        Me.miner_threads.Size = New System.Drawing.Size(382, 23)
+        Me.miner_threads.Size = New System.Drawing.Size(382, 22)
         Me.miner_threads.TabIndex = 4
         '
         'miner_pool
         '
         Me.miner_pool.Location = New System.Drawing.Point(216, 62)
         Me.miner_pool.Name = "miner_pool"
-        Me.miner_pool.Size = New System.Drawing.Size(382, 23)
+        Me.miner_pool.Size = New System.Drawing.Size(382, 22)
         Me.miner_pool.TabIndex = 1
         Me.miner_pool.Text = "http://aropool.com"
         '
@@ -692,10 +720,10 @@ Partial Class frmMain
         '
         Me.Label23.AutoSize = True
         Me.Label23.BackColor = System.Drawing.Color.Transparent
-        Me.Label23.Font = New System.Drawing.Font("Roboto Cn", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.Location = New System.Drawing.Point(50, 356)
+        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.Location = New System.Drawing.Point(41, 356)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(28, 14)
+        Me.Label23.Size = New System.Drawing.Size(35, 15)
         Me.Label23.TabIndex = 12
         Me.Label23.Text = "BCH"
         '
@@ -703,7 +731,7 @@ Partial Class frmMain
         '
         Me.TextBox5.Location = New System.Drawing.Point(83, 353)
         Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(788, 23)
+        Me.TextBox5.Size = New System.Drawing.Size(788, 22)
         Me.TextBox5.TabIndex = 11
         Me.TextBox5.Text = "qrtkqrl3mxzdzl66nchkgdv73uu3rf7jdy7el2vduw"
         '
@@ -711,10 +739,10 @@ Partial Class frmMain
         '
         Me.Label22.AutoSize = True
         Me.Label22.BackColor = System.Drawing.Color.Transparent
-        Me.Label22.Font = New System.Drawing.Font("Roboto Cn", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(50, 312)
+        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Location = New System.Drawing.Point(41, 312)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(26, 14)
+        Me.Label22.Size = New System.Drawing.Size(34, 15)
         Me.Label22.TabIndex = 10
         Me.Label22.Text = "ETH"
         '
@@ -722,10 +750,10 @@ Partial Class frmMain
         '
         Me.Label21.AutoSize = True
         Me.Label21.BackColor = System.Drawing.Color.Transparent
-        Me.Label21.Font = New System.Drawing.Font("Roboto Cn", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(50, 267)
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(41, 267)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(27, 14)
+        Me.Label21.Size = New System.Drawing.Size(33, 15)
         Me.Label21.TabIndex = 9
         Me.Label21.Text = "BTC"
         '
@@ -733,10 +761,10 @@ Partial Class frmMain
         '
         Me.Label20.AutoSize = True
         Me.Label20.BackColor = System.Drawing.Color.Transparent
-        Me.Label20.Font = New System.Drawing.Font("Roboto Cn", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(50, 224)
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(41, 224)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(26, 14)
+        Me.Label20.Size = New System.Drawing.Size(32, 15)
         Me.Label20.TabIndex = 8
         Me.Label20.Text = "LTC"
         '
@@ -744,10 +772,10 @@ Partial Class frmMain
         '
         Me.Label19.AutoSize = True
         Me.Label19.BackColor = System.Drawing.Color.Transparent
-        Me.Label19.Font = New System.Drawing.Font("Roboto Cn", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(50, 176)
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(41, 176)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(29, 15)
+        Me.Label19.Size = New System.Drawing.Size(40, 16)
         Me.Label19.TabIndex = 7
         Me.Label19.Text = "ARO"
         '
@@ -755,7 +783,7 @@ Partial Class frmMain
         '
         Me.TextBox4.Location = New System.Drawing.Point(83, 309)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(788, 23)
+        Me.TextBox4.Size = New System.Drawing.Size(788, 22)
         Me.TextBox4.TabIndex = 6
         Me.TextBox4.Text = "0x4B904bDf071E9b98441d25316c824D7b7E447527"
         '
@@ -763,7 +791,7 @@ Partial Class frmMain
         '
         Me.TextBox3.Location = New System.Drawing.Point(83, 264)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(788, 23)
+        Me.TextBox3.Size = New System.Drawing.Size(788, 22)
         Me.TextBox3.TabIndex = 5
         Me.TextBox3.Text = "1LdoMmYitb4C3pXoGNLL1VRj7xk3smGXoU"
         '
@@ -771,7 +799,7 @@ Partial Class frmMain
         '
         Me.TextBox2.Location = New System.Drawing.Point(83, 221)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(788, 23)
+        Me.TextBox2.Size = New System.Drawing.Size(788, 22)
         Me.TextBox2.TabIndex = 4
         Me.TextBox2.Text = "LWgqzbXGeucKaMmJEvwaAWPFrAgKiJ4Y4m"
         '
@@ -779,7 +807,7 @@ Partial Class frmMain
         '
         Me.TextBox1.Location = New System.Drawing.Point(83, 174)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(788, 23)
+        Me.TextBox1.Size = New System.Drawing.Size(788, 22)
         Me.TextBox1.TabIndex = 3
         Me.TextBox1.Text = "5WuRMXGM7Pf8NqEArVz1NxgSBptkimSpvuSaYC79g1yo3RDQc8TjVtGH5chQWQV7CHbJEuq9DmW5fbmCE" &
     "W4AghQr"
@@ -788,10 +816,10 @@ Partial Class frmMain
         '
         Me.Label18.AutoSize = True
         Me.Label18.BackColor = System.Drawing.Color.Transparent
-        Me.Label18.Font = New System.Drawing.Font("Roboto", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.Location = New System.Drawing.Point(117, 137)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(709, 18)
+        Me.Label18.Size = New System.Drawing.Size(670, 18)
         Me.Label18.TabIndex = 2
         Me.Label18.Text = "If you would like to support the Arionum development, you can donate to one of th" &
     "e addresses below:"
@@ -799,7 +827,7 @@ Partial Class frmMain
         'Label13
         '
         Me.Label13.BackColor = System.Drawing.Color.Transparent
-        Me.Label13.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.Location = New System.Drawing.Point(94, 28)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(748, 80)
@@ -880,7 +908,7 @@ Partial Class frmMain
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button2.FlatAppearance.BorderSize = 0
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Roboto", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.ForeColor = System.Drawing.SystemColors.ButtonShadow
         Me.Button2.Location = New System.Drawing.Point(544, 18)
         Me.Button2.Name = "Button2"
@@ -897,6 +925,22 @@ Partial Class frmMain
         'pool_update
         '
         Me.pool_update.Interval = 2000
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.SlateGray
+        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.ForeColor = System.Drawing.SystemColors.ButtonShadow
+        Me.Button3.Location = New System.Drawing.Point(766, 55)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(161, 22)
+        Me.Button3.TabIndex = 9
+        Me.Button3.Text = "Create a request funds QR"
+        Me.Button3.UseVisualStyleBackColor = False
         '
         'frmMain
         '
@@ -927,6 +971,7 @@ Partial Class frmMain
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
         Me.TabPage5.ResumeLayout(False)
@@ -1011,4 +1056,7 @@ Partial Class frmMain
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents ID As DataGridViewTextBoxColumn
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents Label1 As Label
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Button3 As Button
 End Class

@@ -118,7 +118,7 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>sigla arionum.ico</ApplicationIcon>
@@ -330,6 +330,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="libargon2.dll" />
+    <None Include="Resources\bgfade.jpg" />
+    <Content Include="Resources\btnDarkBlue.jpg" />
+    <None Include="Resources\btnDkBlueRd.png" />
+    <None Include="Resources\btnDkBlueRdBig.png" />
+    <None Include="Resources\btnDkBlueRd12040.png" />
+    <Content Include="Resources\imgBG.jpg" />
+    <None Include="Resources\imgBG2.jpg" />
+    <None Include="Resources\imgBGEncrypt293233.jpg" />
+    <None Include="Resources\imgBGDecrypt.jpg" />
+    <Content Include="Resources\imgXclose.jpg" />
     <Content Include="sigla arionum.ico" />
   </ItemGroup>
   <ItemGroup>

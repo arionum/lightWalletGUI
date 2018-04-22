@@ -505,7 +505,7 @@ Public Class frmMain
             End If
             wallet = AES_Encrypt(wallet, encryptPass)
             isEncrypted = True
-
+            encryptedWallet=wallet
         End If
         Dim file As System.IO.StreamWriter
         Try

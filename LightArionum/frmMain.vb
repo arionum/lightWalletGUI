@@ -41,8 +41,10 @@ Public Class frmMain
     Private Const HTCLIENT As Integer = &H1
     Private Const HTCAPTION As Integer = &H2
     Private Const WM_NCHITTEST As Integer = &H84
+    Public Const WM_NCLBUTTONDBLCLK As Integer = &HA3
 
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+        If m.Msg = WM_NCLBUTTONDBLCLK Then Return
         MyBase.WndProc(m)
 
         If m.Msg = WM_NCHITTEST AndAlso m.Result = HTCLIENT Then
@@ -689,7 +691,11 @@ Public Class frmMain
                         trd.IsBackground = True
                         trd.Start()
                     End If
-
+                    Dim qrGenerator As New QRCodeGenerator
+                    Dim QRCodeData As QRCodeData = qrGenerator.CreateQrCode(address & "|" & public_key & "|" & private_key, QRCodeGenerator.ECCLevel.Q)
+                    Dim QRCode As New QRCode(QRCodeData)
+                    Dim qrCodeImage As Bitmap = QRCode.GetGraphic(20)
+                    PictureBox1.Image = qrCodeImage
                 End If
             End If
         Catch ex As Exception
@@ -854,10 +860,8 @@ Public Class frmMain
 
 
                 Dim msg = InputBox("Please enter the transaction message (optional)")
-                If msg.Length > 0 Then
-                    msg = "|" & msg
-                End If
-                Dim qr As String = "arosend|" & address & "|" & val & msg
+
+                Dim qr As String = "arosend|" & address & "|" & val & "|" & msg & " "
                 Dim qrGenerator As New QRCodeGenerator
                 Dim QRCodeData As QRCodeData = qrGenerator.CreateQrCode(qr, QRCodeGenerator.ECCLevel.Q)
                 Dim QRCode As New QRCode(QRCodeData)
@@ -867,6 +871,14 @@ Public Class frmMain
                 'MsgBox(qr)
             End If
         End If
+
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub frmMain_DoubleClick(sender As Object, e As EventArgs) Handles Me.DoubleClick
 
     End Sub
 End Class

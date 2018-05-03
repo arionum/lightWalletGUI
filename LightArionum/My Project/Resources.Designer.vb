@@ -123,9 +123,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Public ReadOnly Property imgBG() As System.Drawing.Bitmap
+        Public ReadOnly Property img_min() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("imgBG", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("img-min", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -133,9 +133,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Public ReadOnly Property imgBG2() As System.Drawing.Bitmap
+        Public ReadOnly Property imgBG3() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("imgBG2", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("imgBG3", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

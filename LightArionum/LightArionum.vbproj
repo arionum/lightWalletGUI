@@ -31,7 +31,7 @@
     <PublisherName>Arionum Developers</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>34</ApplicationRevision>
+    <ApplicationRevision>37</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -118,10 +118,13 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>sigla arionum.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -353,10 +356,10 @@
     <None Include="Resources\btnDkBlueRd.png" />
     <None Include="Resources\btnDkBlueRdBig.png" />
     <None Include="Resources\btnDkBlueRd12040.png" />
-    <Content Include="Resources\imgBG.jpg" />
-    <None Include="Resources\imgBG2.jpg" />
+    <None Include="Resources\img-min.jpg" />
     <None Include="Resources\imgBGEncrypt293233.jpg" />
     <None Include="Resources\imgBGDecrypt.jpg" />
+    <None Include="Resources\imgBG3.jpg" />
     <Content Include="Resources\imgXclose.jpg" />
     <Content Include="sigla arionum.ico" />
   </ItemGroup>

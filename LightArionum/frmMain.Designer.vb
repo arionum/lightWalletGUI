@@ -44,6 +44,7 @@ Partial Class frmMain
         Me.Label9 = New System.Windows.Forms.Label()
         Me.sendTo = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -102,7 +103,7 @@ Partial Class frmMain
         Me.Button2 = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.pool_update = New System.Windows.Forms.Timer(Me.components)
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Label2 = New System.Windows.Forms.Label()
         Label4 = New System.Windows.Forms.Label()
         Me.TabPage2.SuspendLayout()
@@ -163,9 +164,9 @@ Partial Class frmMain
         Me.btnDecrypt.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDecrypt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDecrypt.ForeColor = System.Drawing.SystemColors.ButtonShadow
-        Me.btnDecrypt.Location = New System.Drawing.Point(792, 18)
+        Me.btnDecrypt.Location = New System.Drawing.Point(774, 18)
         Me.btnDecrypt.Name = "btnDecrypt"
-        Me.btnDecrypt.Size = New System.Drawing.Size(118, 22)
+        Me.btnDecrypt.Size = New System.Drawing.Size(110, 22)
         Me.btnDecrypt.TabIndex = 1
         Me.btnDecrypt.Text = "Decrypt"
         Me.btnDecrypt.UseVisualStyleBackColor = False
@@ -179,9 +180,9 @@ Partial Class frmMain
         Me.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnExport.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExport.ForeColor = System.Drawing.SystemColors.ButtonShadow
-        Me.btnExport.Location = New System.Drawing.Point(668, 18)
+        Me.btnExport.Location = New System.Drawing.Point(658, 18)
         Me.btnExport.Name = "btnExport"
-        Me.btnExport.Size = New System.Drawing.Size(118, 22)
+        Me.btnExport.Size = New System.Drawing.Size(110, 22)
         Me.btnExport.TabIndex = 2
         Me.btnExport.Text = "Backup"
         Me.btnExport.UseVisualStyleBackColor = False
@@ -368,6 +369,22 @@ Partial Class frmMain
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Receive Funds"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.SlateGray
+        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.ForeColor = System.Drawing.SystemColors.ButtonShadow
+        Me.Button3.Location = New System.Drawing.Point(766, 55)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(161, 22)
+        Me.Button3.TabIndex = 9
+        Me.Button3.Text = "Create a request funds QR"
+        Me.Button3.UseVisualStyleBackColor = False
         '
         'Panel1
         '
@@ -910,9 +927,9 @@ Partial Class frmMain
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.ForeColor = System.Drawing.SystemColors.ButtonShadow
-        Me.Button2.Location = New System.Drawing.Point(544, 18)
+        Me.Button2.Location = New System.Drawing.Point(542, 18)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(117, 22)
+        Me.Button2.Size = New System.Drawing.Size(110, 22)
         Me.Button2.TabIndex = 8
         Me.Button2.Text = "Restore"
         Me.Button2.UseVisualStyleBackColor = False
@@ -926,27 +943,27 @@ Partial Class frmMain
         '
         Me.pool_update.Interval = 2000
         '
-        'Button3
+        'Button4
         '
-        Me.Button3.BackColor = System.Drawing.Color.SlateGray
-        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button3.FlatAppearance.BorderSize = 0
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.SystemColors.ButtonShadow
-        Me.Button3.Location = New System.Drawing.Point(766, 55)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(161, 22)
-        Me.Button3.TabIndex = 9
-        Me.Button3.Text = "Create a request funds QR"
-        Me.Button3.UseVisualStyleBackColor = False
+        Me.Button4.BackColor = System.Drawing.Color.Transparent
+        Me.Button4.BackgroundImage = Global.LightArionum.My.Resources.Resources.img_min
+        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Button4.FlatAppearance.BorderSize = 0
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.ForeColor = System.Drawing.Color.Transparent
+        Me.Button4.Image = Global.LightArionum.My.Resources.Resources.img_min
+        Me.Button4.Location = New System.Drawing.Point(898, 4)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(20, 20)
+        Me.Button4.TabIndex = 9
+        Me.Button4.UseVisualStyleBackColor = False
         '
         'frmMain
         '
         Me.BackColor = System.Drawing.SystemColors.Window
-        Me.BackgroundImage = Global.LightArionum.My.Resources.Resources.imgBG2
+        Me.BackgroundImage = Global.LightArionum.My.Resources.Resources.imgBG3
         Me.ClientSize = New System.Drawing.Size(956, 542)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.TabControl1)
@@ -1059,4 +1076,5 @@ Partial Class frmMain
     Friend WithEvents Label1 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
 End Class

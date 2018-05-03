@@ -60,7 +60,7 @@ Public Class frmMain
             Thread.CurrentThread.CurrentCulture = New CultureInfo("EN-US")
 
             If sync_err > 5 Then
-                MsgBox("Could not sync data. Attempted 5 times to connect to the nodes", vbCritical)
+                'MsgBox("Could not sync data. Attempted 5 times to connect to the nodes", vbCritical)
                 sync_err = 0
                 Exit Function
             End If
@@ -110,7 +110,7 @@ Public Class frmMain
 
             Next
         Catch ex As Exception
-            MsgBox("Could not sync data: " & ex.Message, vbCritical)
+            'MsgBox("Could not sync data: " & ex.Message, vbCritical)
             Console.WriteLine(ex.Message)
         End Try
     End Function
@@ -160,6 +160,15 @@ Public Class frmMain
                 file.WriteLine(wallet)
                 file.Close()
                 fstream.Close()
+                Dim s As String
+                Dim tr As System.IO.TextReader = New System.IO.StreamReader(path + "\wallet.aro")
+                s = tr.ReadToEnd
+                tr.Close()
+                If s.Trim <> wallet Then
+                    MsgBox("Could not write the wallet file. Please check the permissions on " + path + "\wallet.aro", vbCritical)
+                    End
+                End If
+
             Catch ex As Exception
                 MsgBox("Could not write the wallet file. Please check the permissions on " + path + "\wallet.aro", vbCritical)
                 End
@@ -507,7 +516,7 @@ Public Class frmMain
             End If
             wallet = AES_Encrypt(wallet, encryptPass)
             isEncrypted = True
-            encryptedWallet=wallet
+            encryptedWallet = wallet
         End If
         Dim file As System.IO.StreamWriter
         Try
@@ -543,7 +552,10 @@ Public Class frmMain
                 wallet = "arionum:" + private_key + ":" + public_key
 
             End If
-
+            If (wallet.Length < 20) Then
+                MsgBox("Something went wrong. Please backup your keys manually!", vbCritical)
+                Exit Sub
+            End If
             Dim file As System.IO.StreamWriter
             Try
 
@@ -552,6 +564,14 @@ Public Class frmMain
                 file.WriteLine(wallet)
                 file.Close()
                 fstream.Close()
+
+                Dim s As String
+                Dim tr As System.IO.TextReader = New System.IO.StreamReader(SaveFileDialog1.FileName)
+                s = tr.ReadToEnd
+                tr.Close()
+                If s.Trim <> wallet Then
+                    MsgBox("Something went wrong. Please backup your keys manually!!!", vbCritical)
+                End If
             Catch ex As Exception
                 MsgBox("Could not write the wallet file. Please check the permissions on " + SaveFileDialog1.FileName, vbCritical)
             End Try

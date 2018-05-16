@@ -7,7 +7,7 @@ A Visual Basic GUI wallet for [Arionum].
 **Requirements:**
 
 - .NET v4.6.1 or higher ([install][dotnet461])
-- VC++ Redist v14.0 or higher ([install][vcredist140])
+- Visual C++ Redistributable v14.0 or higher ([install][vcredist140])
 
 The wallet can either be installed through the official [installer] or using the source code.
 

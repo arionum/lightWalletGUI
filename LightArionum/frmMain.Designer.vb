@@ -44,6 +44,9 @@ Partial Class frmMain
         Me.Label9 = New System.Windows.Forms.Label()
         Me.sendTo = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.btnAlias = New System.Windows.Forms.Button()
+        Me.lblAlias = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
@@ -104,6 +107,7 @@ Partial Class frmMain
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.pool_update = New System.Windows.Forms.Timer(Me.components)
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.Label24 = New System.Windows.Forms.Label()
         Label2 = New System.Windows.Forms.Label()
         Label4 = New System.Windows.Forms.Label()
         Me.TabPage2.SuspendLayout()
@@ -356,6 +360,9 @@ Partial Class frmMain
         Me.TabPage1.BackColor = System.Drawing.Color.Transparent
         Me.TabPage1.BackgroundImage = Global.LightArionum.My.Resources.Resources.bgfade
         Me.TabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.TabPage1.Controls.Add(Me.btnAlias)
+        Me.TabPage1.Controls.Add(Me.lblAlias)
+        Me.TabPage1.Controls.Add(Me.Label15)
         Me.TabPage1.Controls.Add(Me.Button3)
         Me.TabPage1.Controls.Add(Me.Panel1)
         Me.TabPage1.Controls.Add(Me.Label5)
@@ -369,6 +376,34 @@ Partial Class frmMain
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Receive Funds"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'btnAlias
+        '
+        Me.btnAlias.Location = New System.Drawing.Point(780, 18)
+        Me.btnAlias.Name = "btnAlias"
+        Me.btnAlias.Size = New System.Drawing.Size(125, 25)
+        Me.btnAlias.TabIndex = 12
+        Me.btnAlias.Text = "Set Alias"
+        Me.btnAlias.UseVisualStyleBackColor = True
+        Me.btnAlias.Visible = False
+        '
+        'lblAlias
+        '
+        Me.lblAlias.AutoSize = True
+        Me.lblAlias.Location = New System.Drawing.Point(778, 24)
+        Me.lblAlias.Name = "lblAlias"
+        Me.lblAlias.Size = New System.Drawing.Size(0, 16)
+        Me.lblAlias.TabIndex = 11
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(730, 20)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(47, 20)
+        Me.Label15.TabIndex = 10
+        Me.Label15.Text = "Alias:"
         '
         'Button3
         '
@@ -489,7 +524,7 @@ Partial Class frmMain
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label3.Location = New System.Drawing.Point(111, 21)
+        Me.Label3.Location = New System.Drawing.Point(5, 21)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(108, 20)
         Me.Label3.TabIndex = 1
@@ -498,7 +533,7 @@ Partial Class frmMain
         'txtaddress
         '
         Me.txtaddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtaddress.Location = New System.Drawing.Point(219, 20)
+        Me.txtaddress.Location = New System.Drawing.Point(113, 20)
         Me.txtaddress.Name = "txtaddress"
         Me.txtaddress.Size = New System.Drawing.Size(610, 22)
         Me.txtaddress.TabIndex = 0
@@ -691,7 +726,7 @@ Partial Class frmMain
         Me.miner_pool.Name = "miner_pool"
         Me.miner_pool.Size = New System.Drawing.Size(382, 22)
         Me.miner_pool.TabIndex = 1
-        Me.miner_pool.Text = "http://aropool.com"
+        Me.miner_pool.Text = "http://aro.cool"
         '
         'miner_button
         '
@@ -958,11 +993,24 @@ Partial Class frmMain
         Me.Button4.TabIndex = 9
         Me.Button4.UseVisualStyleBackColor = False
         '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.BackColor = System.Drawing.Color.Transparent
+        Me.Label24.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Label24.Location = New System.Drawing.Point(359, 15)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(156, 18)
+        Me.Label24.TabIndex = 10
+        Me.Label24.Text = "LightWallet 0.4.0"
+        '
         'frmMain
         '
         Me.BackColor = System.Drawing.SystemColors.Window
         Me.BackgroundImage = Global.LightArionum.My.Resources.Resources.imgBG3
         Me.ClientSize = New System.Drawing.Size(956, 542)
+        Me.Controls.Add(Me.Label24)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.StatusStrip1)
@@ -1077,4 +1125,8 @@ Partial Class frmMain
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
+    Friend WithEvents btnAlias As Button
+    Friend WithEvents lblAlias As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label24 As Label
 End Class

@@ -85,6 +85,8 @@ Public Class frmMain
             Me.statusNode.Text = peer
 
 
+
+
             res = get_json(peer + "/api.php?q=currentBlock")
 
             If res.ToString = "" Then
@@ -92,7 +94,9 @@ Public Class frmMain
             End If
             Me.statusBlock.Text = res("height")
 
+
             res = get_json(peer + "/api.php?q=getTransactions&account=" + address)
+
 
             If res.ToString = "" Then
                 Exit Function
@@ -296,6 +300,21 @@ Public Class frmMain
             End
         End If
 
+        Dim Generator As System.Random = New System.Random()
+        Dim r = Generator.Next(0, total_peers - 1)
+        Dim peer = peers(r)
+
+        Dim res
+        res = get_json(peer + "/api.php?q=getAlias&account=" + address)
+
+        If res = False Then
+            btnAlias.Visible = True
+        End If
+
+
+
+
+
         trd = New Thread(AddressOf sync_data)
         trd.IsBackground = True
         trd.Start()
@@ -418,7 +437,7 @@ Public Class frmMain
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If sendTo.Text.Length < 10 Then Exit Sub
+        If sendTo.Text.Length < 4 Then Exit Sub
         If Convert.ToDecimal(sendAmt.Text) < 0.00000001 Then
             MsgBox("Invalid amount", vbCritical)
             Exit Sub
@@ -432,6 +451,10 @@ Public Class frmMain
             Exit Sub
         End If
 
+        Dim version As String = 1
+        If sendTo.Text.Length < 26 Then
+            version = 2
+        End If
 
 
 
@@ -441,7 +464,7 @@ Public Class frmMain
             uTime = (DateTime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds
 
             Dim info As String
-            info = FormatNumber(sum, 8).Replace(",", "") + "-" + FormatNumber(f, 8).Replace(",", "") + "-" + sendTo.Text + "-" + sendMsg.Text + "-1-" + public_key + "-" + uTime.ToString
+            info = FormatNumber(sum, 8).Replace(",", "") + "-" + FormatNumber(f, 8).Replace(",", "") + "-" + sendTo.Text + "-" + sendMsg.Text + "-" + version + "-" + public_key + "-" + uTime.ToString
             ' Console.WriteLine(info)
             frmLog.flog("Transaction data: " & info)
             Dim file As System.IO.StreamWriter
@@ -478,14 +501,13 @@ Public Class frmMain
 
             Dim sig As String = SimpleBase.Base58.Bitcoin.Encode(signature)
 
-
-            res = get_json(peer + "/api.php?q=send&version=1&public_key=" + public_key + "&signature=" + sig + "&dst=" + sendTo.Text + "&val=" + FormatNumber(sum, 8).Replace(",", "") + "&date=" + uTime.ToString + "&message=" + sendMsg.Text)
+            res = get_json(peer + "/api.php?q=send&version=" + Version + "&public_key=" + public_key + "&signature=" + sig + "&dst=" + sendTo.Text + "&val=" + FormatNumber(sum, 8).Replace(",", "") + "&date=" + uTime.ToString + "&message=" + sendMsg.Text)
 
             If res.ToString = "" Then
                 r = Generator.Next(0, total_peers - 1)
                 peer = peers(r)
 
-                res = get_json(peer + "/api.php?q=send&version=1&public_key=" + public_key + "&signature=" + sig + "&dst=" + sendTo.Text + "&val=" + FormatNumber(sum, 8).Replace(",", "") + "&date=" + uTime.ToString + "&message=" + sendMsg.Text)
+                res = get_json(peer + "/api.php?q=send&version=" + Version + "&public_key=" + public_key + "&signature=" + sig + "&dst=" + sendTo.Text + "&val=" + FormatNumber(sum, 8).Replace(",", "") + "&date=" + uTime.ToString + "&message=" + sendMsg.Text)
                 If res.ToString = "" Then
                     MsgBox("Could not send the transaction to the peer (" & peer & ")! Please try again!", vbCritical)
                     Exit Sub
@@ -900,5 +922,69 @@ Public Class frmMain
 
     Private Sub frmMain_DoubleClick(sender As Object, e As EventArgs) Handles Me.DoubleClick
 
+    End Sub
+
+    Private Sub btnAlias_Click(sender As Object, e As EventArgs) Handles btnAlias.Click
+        On Error GoTo Err
+        If Convert.ToInt32(statusBlock.Text) < 80000 Then
+            MsgBox("The alias can only be set after block 80.000", vbCritical)
+            Exit Sub
+        End If
+        Dim als = InputBox("Please enter your new alias. Only upper case letters, 4-25 chars.")
+        als = als.ToUpper()
+
+        Dim uTime As Int64
+        uTime = (DateTime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds
+
+        Dim info As String
+        info = FormatNumber(0.00000001, 8).Replace(",", "") + "-" + FormatNumber(10, 8).Replace(",", "") + "-" + address + "-" + als + "-3-" + public_key + "-" + uTime.ToString
+        ' Console.WriteLine(info)
+        frmLog.flog("Transaction data: " & info)
+        Dim file As System.IO.StreamWriter
+
+
+        Dim res As String
+        Static Generator As System.Random = New System.Random()
+        Dim r = Generator.Next(0, total_peers - 1)
+        Dim peer = peers(r)
+
+        Dim tmp_key As String = coin2pem(private_key, True)
+        Dim tmp_key2 As String = coin2pem(public_key, False)
+
+
+        Dim textReader As TextReader = New StringReader(tmp_key)
+        Dim pemReader As PemReader = New PemReader(textReader)
+        Dim _keyPair As AsymmetricCipherKeyPair = pemReader.ReadObject()
+        Dim _privateKeyParams As ECPrivateKeyParameters = _keyPair.Private
+        Dim _publicKeyParams As ECPublicKeyParameters = _keyPair.Public
+
+
+
+        Dim signer As ISigner = SignerUtilities.GetSigner("SHA-256withECDSA")
+        signer.Init(True, _keyPair.Private)
+        Dim bytes As Byte() = System.Text.Encoding.UTF8.GetBytes(info)
+        signer.BlockUpdate(bytes, 0, bytes.Length)
+        Dim signature As Byte() = signer.GenerateSignature()
+
+        Dim sig As String = SimpleBase.Base58.Bitcoin.Encode(signature)
+        Dim version As String = 3
+
+        res = get_json(peer + "/api.php?q=send&version=" + version + "&public_key=" + public_key + "&signature=" + sig + "&dst=" + address + "&val=" + FormatNumber(0.00000001, 8).Replace(",", "") + "&date=" + uTime.ToString + "&message=" + als)
+
+        If res.ToString = "" Then
+            r = Generator.Next(0, total_peers - 1)
+            peer = peers(r)
+
+            res = get_json(peer + "/api.php?q=send&version=" + version + "&public_key=" + public_key + "&signature=" + sig + "&dst=" + address + "&val=" + FormatNumber(0.00000001, 8).Replace(",", "") + "&date=" + uTime.ToString + "&message=" + als)
+            If res.ToString = "" Then
+                MsgBox("Could not send the transaction to the peer (" & peer & ")! Please try again!", vbCritical)
+                Exit Sub
+            End If
+        End If
+        btnAlias.Visible = False
+        lblAlias.Text = als + "(Pending)"
+        Exit Sub
+Err:
+        MsgBox("Something went wrong with setting up the alias. Please try again!", vbCritical)
     End Sub
 End Class

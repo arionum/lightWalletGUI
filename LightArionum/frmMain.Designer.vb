@@ -215,7 +215,7 @@ Partial Class frmMain
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Size = New System.Drawing.Size(930, 436)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Send Transactions"
+        Me.TabPage2.Text = "Send Transaction"
         '
         'lbllasttx
         '
@@ -374,7 +374,7 @@ Partial Class frmMain
         Me.TabPage1.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.TabPage1.Size = New System.Drawing.Size(930, 436)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Receive Funds"
+        Me.TabPage1.Text = "Transactions"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'btnAlias
@@ -574,7 +574,7 @@ Partial Class frmMain
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Size = New System.Drawing.Size(930, 436)
         Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Wallet info"
+        Me.TabPage3.Text = "Wallet Info"
         '
         'PictureBox1
         '
